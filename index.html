@@ -1,12 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOLA</title>
+  <!-- ===== HEAD + TEMA (COMPARTIDO: acordar quién lo sube primero) ===== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Máximo Parra · Bisutería de toda la vida · Madrid</title>
+  <meta name="description" content="Máximo Parra, bisutería, plata y complementos en Madrid desde 1941.">
+
+  <!-- Fuentes (sustitutas de Buffet Script y Neue Haas, como en el Figma) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind v4 (Play CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.4"></script>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+
+    @theme static {
+      /* Paleta en bruto ("static" evita que Tailwind borre las variables
+         que solo se usan desde styles.css) */
+      --color-rotulo: #E20E0E;
+      --color-rotulo-oscuro: #B3000B;
+      --color-rotulo-claro: #FF5C5C;
+      --color-azul-toldo: #00398C;
+      --color-azul-claro: #9DB8E6;
+      --color-rosa-mostrador: #FFE0E0;
+      --color-tinta: #000000;
+      --color-papel: #FFFFFF;
+      --color-gris-50: #F5F5F5;
+      --color-gris-200: #E6E6E6;
+      --color-gris-400: #BEBEBE;
+      --color-gris-600: #6E6E6E;
+      --color-azul-marino: #032351;
+      --color-azul-niebla: #C9D6EC;
+
+      /* Tipografías */
+      --font-titulo: "Great Vibes", cursive;
+      --font-texto: "Hanken Grotesk", sans-serif;
+    }
+
+    /* Tokens semánticos (sus valores viven en styles.css) */
+    @theme inline {
+      --color-background: var(--background);
+      --color-foreground: var(--foreground);
+      --color-card: var(--card);
+      --color-card-foreground: var(--card-foreground);
+      --color-muted: var(--muted);
+      --color-muted-foreground: var(--muted-foreground);
+      --color-primary: var(--primary);
+      --color-primary-foreground: var(--primary-foreground);
+      --color-secondary: var(--secondary);
+      --color-secondary-foreground: var(--secondary-foreground);
+      --color-accent: var(--accent);
+      --color-accent-foreground: var(--accent-foreground);
+      --color-brand: var(--brand);
+      --color-border: var(--border);
+      --color-ring: var(--ring);
+    }
+  </style>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- ===== FIN HEAD + TEMA ===== -->
 </head>
-<body>
-    <p>HOLA</p>
-    <p>Cómo estás?</p>
+
+<body class="bg-background text-foreground font-texto antialiased">
+
+  <!-- ===== CABECERA (COMPARTIDO / provisional: conservar id="logo-nav") ===== -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-secondary text-secondary-foreground">
+    <nav class="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 text-sm font-medium uppercase tracking-wider" aria-label="Principal">
+      <ul class="flex gap-6"><li><a href="#nosotros" class="hover:underline">Nosotros</a></li><li><a href="#productos" class="hover:underline">Productos</a></li></ul>
+      <a id="logo-nav" href="#portada" class="firma text-3xl normal-case tracking-normal opacity-0" aria-label="Máximo Parra, inicio">Máximo Parra</a>
+      <ul class="flex gap-6"><li><a href="#novedades" class="hover:underline">Novedades</a></li><li><a href="#visitanos" class="hover:underline">Visítanos</a></li></ul>
+    </nav>
+  </header>
+  <!-- ===== FIN CABECERA ===== -->
+
+  <main>
+    <!-- ===== PORTADA con scroll (JAIME) ===== -->
+    <section id="portada" class="portada--estatica relative h-svh w-full overflow-hidden" aria-label="Portada">
+      <div class="relative h-full w-full">
+
+        <!-- Paso 1: firma -->
+        <div class="paso-1 absolute inset-x-0 top-[16svh] z-30 text-center" id="firma">
+          <p class="text-lg tracking-widest text-brand">1941</p>
+          <h1 class="firma anim-firma text-[clamp(3.5rem,13vw,12.5rem)]" style="rotate:-5deg">Máximo Parra</h1>
+        </div>
+        <p class="paso-1 absolute inset-x-0 top-[41svh] z-30 text-center text-sm font-medium uppercase tracking-[0.2em] text-brand" id="madrid">Madrid</p>
+
+        <!-- Pendiente (vídeo que se mueve con el scroll) -->
+        <div id="video-pendiente" class="video-pendiente pointer-events-none absolute left-1/2 top-[60%] z-20 aspect-[848/480] w-[min(120vw,150svh)] -translate-x-1/2 -translate-y-1/2">
+          <video class="h-full w-full object-contain mix-blend-multiply" src="assets/diamante.mp4" muted playsinline preload="auto" aria-label="Pendiente de plata con piedra, girando"></video>
+        </div>
+
+        <!-- Aviso de scroll -->
+        <div class="paso-1 absolute inset-x-0 bottom-6 z-30 flex flex-col items-center gap-2 text-xs font-medium uppercase tracking-widest text-brand" id="flecha">
+          <span>Desliza para ver el muestrario</span>
+          <svg class="anim-flecha" width="14" height="24" viewBox="0 0 14 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 1v20M1 15l6 7 6-7"/></svg>
+        </div>
+
+        <!-- Paso 3: materiales y cierres -->
+        <div class="paso-3 pointer-events-none absolute inset-0 z-30 flex items-end justify-center px-6 pb-10 md:items-center md:justify-end md:pb-0 md:pr-[7vw]" aria-hidden="false">
+          <div id="panel-materiales" class="pointer-events-auto w-full max-w-md bg-background/90 p-4 md:bg-transparent md:p-0">
+            <h2 class="mb-6 text-4xl font-bold text-foreground md:text-5xl">Elige el tuyo</h2>
+            <p class="etiqueta mb-3">Material</p>
+            <ul class="mb-6 flex flex-wrap gap-2">
+              <li><span class="chip chip--activo">Plata</span></li>
+              <li><span class="chip">Rodio</span></li>
+              <li><span class="chip">Chapado</span></li>
+              <li><span class="chip">Marcasita</span></li>
+            </ul>
+            <p class="etiqueta mb-3">Cierre</p>
+            <ul class="flex flex-wrap gap-2">
+              <li><span class="chip">Tornillo</span></li>
+              <li><span class="chip">Omega</span></li>
+              <li><span class="chip">Presión</span></li>
+              <li><span class="chip">Varilla</span></li>
+              <li><span class="chip">Gancho</span></li>
+              <li><span class="chip">Seguridad</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Paso 4: escaparate -->
+        <div class="paso-4 invisible absolute inset-0 z-10 flex flex-col items-center px-4 pt-[14svh] opacity-0" id="panel-escaparate">
+          <h2 class="text-center text-3xl font-bold text-foreground md:text-4xl">Te esperamos en el escaparate</h2>
+          <div class="mt-5 aspect-[16/9] w-full max-w-3xl bg-muted" role="img" aria-label="Fachada de la tienda Máximo Parra">
+            <!-- Sustituir por la foto real: <img src="assets/fachada.jpg" alt="Fachada de la tienda Máximo Parra" class="h-full w-full object-cover"> -->
+          </div>
+          <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="#productos" class="boton">Ver productos</a>
+            <a href="#visitanos" class="boton">Cómo llegar</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- ===== FIN PORTADA (JAIME) ===== -->
+
+    <!-- ===== HISTORIA · ¿QUIÉNES SOMOS? (JAIME) ===== -->
+    <section id="nosotros" class="entra mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 md:grid-cols-2 md:gap-16 md:py-28" aria-labelledby="titulo-historia">
+      <div class="aspect-[4/5] w-full bg-muted">
+        <!-- Sustituir por la foto real -->
+        <img src="assets/pendiente-historia.jpg" alt="Pendiente de plata con piedra azul clara, de los muestrarios de Máximo Parra" class="h-full w-full object-cover" onerror="this.remove()">
+      </div>
+
+      <div>
+        <p class="etiqueta mb-6">¿Quiénes somos?</p>
+        <h2 id="titulo-historia" class="mb-6 text-4xl font-bold text-brand md:text-5xl text-balance">Bisutería de toda la vida</h2>
+        <p class="max-w-lectura text-lg leading-relaxed">
+          En Máximo Parra puedes encontrar todo lo que tus clientes necesitan o lo que quieras vender del mundo de la bisutería, plata y complementos. Podemos proveerte de uno de los muestrarios de pendientes más amplios y surtidos del país: bisutería, rodio, chapado, plata, tornillo, presión, omega…
+        </p>
+
+        <dl class="mt-10 grid grid-cols-3 gap-4">
+          <div>
+            <dt class="cifra">1941</dt>
+            <dd class="mt-2 text-sm text-muted-foreground">Año de apertura</dd>
+          </div>
+          <div>
+            <dt class="cifra">Mayor</dt>
+            <dd class="mt-2 text-sm text-muted-foreground">Venta a tiendas y profesionales</dd>
+          </div>
+          <div>
+            <dt class="cifra">Detalle</dt>
+            <dd class="mt-2 text-sm text-muted-foreground">Venta a particulares</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+    <!-- ===== FIN HISTORIA (JAIME) ===== -->
+
+    <!-- ===== SECCIONES DE MARTINA =====
+         Productos (id="productos"), Novedades (id="novedades"),
+         Horario y ubicación (id="visitanos"), etc.
+         Los enlaces del navbar apuntan a estos ids. -->
+
+  </main>
+
+  <!-- ===== FOOTER (MARTINA) ===== -->
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/portada.js"></script> <!-- JAIME -->
+  <script src="js/script.js"></script> <!-- MARTINA / común -->
 </body>
 </html>
