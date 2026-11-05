@@ -24,3 +24,8 @@
   from { transform: translateX(0) skewX(-20deg); }
   to   { transform: translateX(1900px) skewX(-20deg); }
 }
+
+@keyframes balanceo {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50%      { transform: rotate(2.5deg); }
+}
