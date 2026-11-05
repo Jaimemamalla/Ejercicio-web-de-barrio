@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="media/fotos/pendiente/f_049.webp" fetchpriority="high">
 
@@ -91,6 +91,16 @@
           focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo
           aria-pressed:bg-rotulo aria-pressed:text-papel
           dark:border-papel dark:bg-transparent dark:text-papel dark:hover:bg-papel dark:hover:text-azul-toldo dark:aria-pressed:bg-papel dark:aria-pressed:text-azul-toldo dark:focus-visible:outline-rotulo-claro;
+      }
+
+      /* Título de sección: 34 px en móvil, 44 px en tablet y 56 px en escritorio */
+      .titulo-seccion {
+        @apply text-[2.125rem] leading-[1.1] font-semibold tracking-[-0.01em] md:text-[2.75rem] md:leading-[1.05] md:tracking-[-0.02em] xl:text-[3.5rem];
+      }
+
+      /* Tarjeta con borde */
+      .tarjeta {
+        @apply border-2 border-rotulo bg-papel dark:border-papel dark:bg-azul-toldo;
       }
 
       /* Interruptor de modo oscuro */
@@ -316,7 +326,101 @@
     </section>
     <!-- ===== FIN HISTORIA ===== -->
 
-    <!-- ===== SECCIONES DE MARTINA: productos, novedades, horario y ubicación ===== -->
+    <!-- ===== SECCIONES DE MARTINA: productos y novedades ===== -->
+
+    <!-- ===== LA TIENDA: nuestros mostradores de siempre (Jaime) ===== -->
+    <section id="tienda" class="bg-papel dark:bg-azul-toldo" aria-labelledby="titulo-tienda">
+      <div class="mx-auto grid max-w-7xl gap-6 px-5 py-16 sm:px-6 lg:grid-cols-2 lg:gap-x-16 lg:px-8 lg:py-24 xl:grid-cols-[1fr_35rem]">
+        <h2 id="titulo-tienda" class="titulo-seccion max-w-130 text-rotulo lg:col-start-1 lg:row-start-1 dark:text-papel">Nuestros mostradores de siempre</h2>
+
+        <div class="aspect-[350/180] w-full overflow-hidden bg-gris-50 sm:aspect-video lg:col-start-2 lg:row-span-3 lg:row-start-1 lg:aspect-[4/3] lg:self-center dark:bg-azul-marino">
+          <img src="media/fotos/tienda.jpg" alt="Mostradores de la tienda Máximo Parra con pendientes, collares y abanicos" class="size-full object-cover" onerror="this.remove()">
+        </div>
+
+        <p class="max-w-130 text-lg leading-normal lg:col-start-1 lg:row-start-2">
+          En nuestros históricos y legendarios mostradores ponemos a disposición de nuestros clientes pendientes, collares, <span class="hidden md:inline">colgantes, </span>pulseras, sortijas, <span class="hidden md:inline">broches, </span>mantillas, peinetas, <span class="hidden md:inline">tiaras, </span>rosarios, accesorios de Primera Comunión, abanicos<span class="hidden md:inline">, bolsos de fiesta, gemelos</span> y mucho más.
+        </p>
+
+        <div class="lg:col-start-1 lg:row-start-3">
+          <a href="#visitanos" class="boton w-full sm:w-auto">Cómo llegar</a>
+        </div>
+      </div>
+    </section>
+    <!-- ===== FIN LA TIENDA ===== -->
+
+    <!-- ===== VECINOS Y COMERCIOS: si eres del barrio o si tienes una tienda (Jaime) ===== -->
+    <section id="comercios" class="bg-papel dark:bg-azul-toldo" aria-label="Vecinos y comercios">
+      <div class="mx-auto grid max-w-7xl gap-4 px-5 pb-16 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:pb-24">
+        <div class="flex flex-col items-start gap-4 bg-rosa-mostrador px-6 py-8 text-rotulo-oscuro lg:px-12 lg:py-14 dark:bg-azul-marino dark:text-papel">
+          <h2 class="titulo-seccion">Si eres del barrio</h2>
+          <p class="text-lg leading-normal">Pásate a ver el muestrario. Te guardamos la pieza por WhatsApp y te cambiamos el cierre de los pendientes en el momento.</p>
+          <a href="#visitanos" class="boton w-full sm:w-auto">Cómo llegar</a>
+        </div>
+
+        <div class="flex flex-col items-start gap-4 bg-azul-toldo px-6 py-8 text-papel lg:px-12 lg:py-14 dark:border dark:border-azul-claro dark:bg-azul-marino">
+          <h2 class="titulo-seccion">Si tienes una tienda</h2>
+          <p class="text-lg leading-normal">Venta al por mayor de bisutería, plata y complementos para comercios de toda España.</p>
+          <a href="mailto:hola@maximoparra.es?subject=Cat%C3%A1logo%20mayorista" class="boton w-full sm:w-auto"><span><span class="hidden min-[26rem]:inline">Pedir </span>catálogo mayorista</span></a>
+        </div>
+      </div>
+    </section>
+    <!-- ===== FIN VECINOS Y COMERCIOS ===== -->
+
+    <!-- ===== HORARIO Y UBICACIÓN: horario, mapa y contacto (Jaime) ===== -->
+    <section id="visitanos" class="bg-papel dark:bg-azul-toldo" aria-labelledby="titulo-visitanos">
+      <div class="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-16 sm:px-6 lg:gap-12 lg:px-8 lg:py-24">
+        <h2 id="titulo-visitanos" class="titulo-seccion text-rotulo dark:text-papel">Horario y ubicación</h2>
+
+        <div class="grid gap-6 lg:grid-cols-3 lg:gap-8">
+          <div class="tarjeta flex flex-col items-start gap-3 px-5 py-6 lg:p-7">
+            <p id="estado-tienda" hidden data-estado="abierto"
+               class="inline-flex items-center rounded-full border-2 border-rotulo bg-rotulo px-4 py-1.5 text-sm font-medium tracking-wider text-papel uppercase data-[estado=cerrado]:bg-papel data-[estado=cerrado]:text-rotulo dark:border-papel dark:bg-papel dark:text-azul-toldo dark:data-[estado=cerrado]:bg-transparent dark:data-[estado=cerrado]:text-papel"></p>
+            <h3 class="text-2xl leading-[1.2] font-semibold text-rotulo dark:text-papel">Horario</h3>
+            <dl class="flex flex-col gap-3 text-lg">
+              <div>
+                <dt class="font-bold">Lunes a viernes</dt>
+                <dd class="leading-normal">10:00 a 14:00 y 17:00 a 20:00</dd>
+              </div>
+              <div>
+                <dt class="font-bold">Sábados</dt>
+                <dd class="leading-normal">10:00 a 14:00</dd>
+              </div>
+              <div>
+                <dt class="font-bold">Domingos y festivos</dt>
+                <dd class="leading-normal">Cerrado</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="tarjeta relative h-60 overflow-hidden bg-gris-50 sm:h-80 lg:h-auto dark:bg-azul-marino">
+            <iframe title="Mapa de Google Maps con la ubicación de Máximo Parra Bisutería"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.7967604822124!2d-3.7089340233104227!3d40.41335297143954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42287f6594e199%3A0x7051fb3551d03ccc!2sM%C3%81XIMO%20PARRA%20BISUTER%C3%8DA!5e0!3m2!1ses!2ses!4v1793898038161!5m2!1ses!2ses"
+                    class="absolute inset-0 size-full border-0 dark:hue-rotate-180 dark:invert"
+                    allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+
+          <div class="tarjeta flex flex-col items-start gap-3 px-5 py-6 lg:p-7">
+            <h3 class="text-2xl leading-[1.2] font-semibold text-rotulo dark:text-papel">Contacto</h3>
+            <dl class="flex flex-col gap-3 text-lg">
+              <div>
+                <dt class="font-bold">Dirección</dt>
+                <dd class="leading-normal">Calle de ejemplo 00, Madrid</dd>
+              </div>
+              <div>
+                <dt class="font-bold">Teléfono</dt>
+                <dd class="leading-normal"><a href="tel:+34910000000" class="transition-colors hover:text-rotulo focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">910 000 000</a></dd>
+              </div>
+              <div>
+                <dt class="font-bold">Correo</dt>
+                <dd class="leading-normal"><a href="mailto:hola@maximoparra.es" class="transition-colors hover:text-rotulo focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">hola@maximoparra.es</a></dd>
+              </div>
+            </dl>
+            <a href="tel:+34910000000" class="boton w-full sm:w-auto">Llamar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== FIN HORARIO Y UBICACIÓN ===== -->
 
   </main>
 
@@ -328,6 +432,7 @@
   <script src="js/navbar.js"></script>
   <script src="js/intro.js"></script>
   <script src="js/portada.js"></script>
+  <script src="js/horario.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
