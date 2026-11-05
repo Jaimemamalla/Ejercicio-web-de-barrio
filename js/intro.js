@@ -1,4 +1,4 @@
-// intro.js · El logo "Máximo Parra" se dibuja y después entra la web.
+// intro.js: el logo "Máximo Parra" se dibuja y después entra la web.
 // Se puede saltar con clic, tecla o el botón "Entrar". Con "reducir movimiento" no se muestra.
 
 (() => {
@@ -22,14 +22,13 @@
     setTimeout(() => {
       intro.remove();
       if (window.ScrollTrigger) ScrollTrigger.refresh(); // recalcula el pin de la portada
-    }, 850);
+    }, 650);
   };
 
-  // Empieza a dibujar (trazo 2,8 s + relleno hasta ~3,2 s + pequeña pausa)
-  requestAnimationFrame(() => {
-    intro.querySelector('.intro-logo').classList.add('dibujando');
-    setTimeout(cerrar, 4000);
-  });
+  // El dibujo arranca solo con CSS (clase intro-activa en <html>); aquí solo se
+  // programa el cierre: trazo 1,8 s + relleno hasta ~2 s + pequeña pausa
+  intro.querySelector('.intro-logo').classList.add('dibujando');
+  setTimeout(cerrar, 2800);
 
   // Saltar la intro
   intro.addEventListener('click', cerrar);
