@@ -10,10 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Fuente: NEUE HAAS GROTESK -->
-  <link rel="stylesheet" href="https://use.typekit.net/rxe6ems.css">
-
-  <!-- Fuente: BUFFET SCRIP -->
+  <!-- Fuente: NEUE HAAS GROTESK + BUFFET SCRIPT -->
   <link rel="stylesheet" href="https://use.typekit.net/rxe6ems.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -113,7 +110,7 @@
   <!-- ===== FIN HEAD Y TEMA ===== -->
 </head>
 
-<body class="bg-papel font-texto text-tinta antialiased dark:bg-azul-toldo dark:text-papel">
+<body class="min-h-screen flex flex-col bg-papel font-texto text-tinta antialiased dark:bg-azul-toldo dark:text-papel">
 
   <!-- Logo y destello reutilizables con <use href="#logo-path"> -->
   <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
@@ -169,27 +166,24 @@
   </header>
   <!-- ===== FIN CABECERA ===== -->
 
-    <!-- ===== SECCIONES DE MARTINA: productos, novedades, horario y ubicación ===== -->
-
-  </main>
-
   <!-- ===== FOOTER (Martina) ===== -->
-   <footer class="">
-    <h2 class="">Máximo Parra</h2>
+   <footer class="mt-auto w-full bg-rotulo text-papel px-9 py-10 px-5 pt-12 pb-10">
 
-    <div>
-        <ul class="">
-            <li><a href="">NOSOTROS</a></li>
-            <li><a href="">PRODUCTOS</a></li>
-            <li><a href="">NOVEDADES</a></li>
-            <li><a href="">VISÍTANOS</a></li>
-            <li><a href="">INSTAGRAM</a></li>
+    <div class="flex flex-col justify-between md:flex-row md:items-center md:flex-row md:items-end">
+        <h2 class="font-titulo text-2xl sm:text-3xl font-medium  mb-5">Máximo Parra</h2>
+
+        <ul class="flex flex-col md:flex-row items-start gap-3 md:gap-10 font-texto uppercase sm:text-sm mb-5">
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="#">Novedades</a></li>
+            <li><a href="#">Visítanos</a></li>
+            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         </ul>
     </div>
 
     <hr>
 
-    <p class="">© 2026 Máximo Parra. Práctica de Maquetación Web, UDIT. Martina y Jaime. Repositorio en GitHub y web en GitHub Pages.</p>
+    <p class="mt-5 text-xs">© 2026 Máximo Parra. Práctica de Maquetación Web, UDIT. Martina y Jaime. Repositorio en GitHub y web en GitHub Pages.</p>
    </footer>
      <!-- ===== FIN FOOTER ===== -->
 
