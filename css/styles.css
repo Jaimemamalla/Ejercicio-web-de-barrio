@@ -1,10 +1,6 @@
-/* ==========================================================
-   styles.css de Máximo Parra
-   Todo lo que Tailwind no resuelve bien. Organizado en capas.
-   ========================================================== */
+/* Estilos propios de Máximo Parra, organizados en capas */
 
-/* Tipografía real del logo. Poner los archivos en media/fonts/
-   (basta con uno; woff2 es el que menos pesa). Si faltan, se usa Great Vibes. */
+/* Tipografía */
 @font-face {
   font-family: "Buffet Script";
   src: url("../media/fonts/BuffetScript.woff2") format("woff2"),
@@ -16,7 +12,7 @@
 }
 
 @layer base {
-  /* Tokens (claro). Apuntan a la paleta definida en @theme */
+  /* Tokens modo claro */
   :root {
     --background: var(--color-papel);
     --foreground: var(--color-tinta);
@@ -36,7 +32,7 @@
     --ring: var(--color-azul-toldo);
   }
 
-  /* Tokens (oscuro): cambian los valores, no los nombres */
+  /* Tokens modo oscuro */
   .dark {
     --background: var(--color-azul-toldo);
     --foreground: var(--color-papel);
@@ -71,7 +67,7 @@
 }
 
 @layer components {
-  /* Etiqueta con sombra (¿QUIÉNES SOMOS?, MATERIAL...) */
+  /* Etiqueta */
   .etiqueta {
     display: inline-block;
     padding: 0.2rem 0.75rem;
@@ -85,7 +81,7 @@
     box-shadow: 4px 4px 0 var(--brand);
   }
 
-  /* Botón: se hunde sobre su sombra al pulsar */
+  /* Botón */
   .boton {
     display: inline-block;
     padding: 0.85rem 1.75rem;
@@ -108,7 +104,7 @@
     box-shadow: 0 0 0 var(--primary);
   }
 
-  /* Chip (filtros de material y cierre) */
+  /* Chip */
   .chip {
     display: inline-block;
     padding: 0.35rem 1rem;
@@ -127,14 +123,13 @@
     color: var(--primary-foreground);
   }
 
-  /* Firma del rótulo: script solo para el logo */
   .firma {
     font-family: var(--font-titulo);
     color: var(--brand);
     line-height: 0.95;
   }
 
-  /* Cifras de la sección Quiénes somos */
+  /* Cifras de Quiénes somos */
   .cifra {
     font-size: 2rem;
     font-weight: 500;
@@ -145,12 +140,10 @@
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-  .max-w-lectura { max-width: 70ch; } /* máx. 70 caracteres por línea */
+  .max-w-lectura { max-width: 70ch; }
 }
 
-/* ----------------------------------------------------------
-   Animaciones propias
-   ---------------------------------------------------------- */
+/* Animaciones */
 @keyframes flecha-baja {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(8px); }
@@ -171,7 +164,7 @@
   .anim-firma  { animation: firma-aparece 0.9s ease-out both; }
 }
 
-/* Entradas suaves de sección con scroll-driven animations */
+/* Entrada de secciones al hacer scroll */
 @supports (animation-timeline: view()) {
   .entra {
     animation: entrada-seccion linear both;
@@ -180,10 +173,7 @@
   }
 }
 
-/* ----------------------------------------------------------
-   Portada con scroll
-   Sin JS (o con reducir movimiento) se ve el paso 4 fijo.
-   ---------------------------------------------------------- */
+/* Portada sin animación (sin JS o con reducir movimiento) */
 .portada--estatica .paso-1,
 .portada--estatica .paso-3 { display: none; }
 .portada--estatica .paso-4 { opacity: 1; visibility: visible; }
@@ -194,10 +184,7 @@
   .anim-flecha, .anim-firma, .entra { animation: none; }
 }
 
-/* ----------------------------------------------------------
-   Intro: el logo se dibuja y luego se rellena
-   (el path del logo lleva pathLength="1", por eso el trazo mide 1)
-   ---------------------------------------------------------- */
+/* Intro */
 .intro-activa { overflow: hidden; }
 .intro-activa .anim-firma { animation-play-state: paused; }
 
@@ -210,7 +197,6 @@
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
 }
-/* Arranca con la propia página (clase en <html>), sin esperar al JS */
 .intro-activa .intro-logo,
 .intro-logo.dibujando {
   animation:
@@ -228,12 +214,9 @@
   #intro { display: none; }
 }
 
-/* ----------------------------------------------------------
-   Vídeo del pendiente: bordes difuminados (en lugar de mezclar colores,
-   que es muy caro de pintar sobre un vídeo grande) y capa propia en GPU
-   ---------------------------------------------------------- */
+/* Vídeo del pendiente */
 .video-pendiente { will-change: transform, clip-path; }
 .video-pendiente video {
-  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
-  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 100%);
 }
