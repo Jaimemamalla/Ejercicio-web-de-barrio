@@ -30,18 +30,6 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@layer components {
-  /* Vídeo del pendiente: bordes difuminados para que no se vea el cuadro */
-  .video-difuminado video {
-    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 52%, transparent 70%);
-    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 52%, transparent 70%);
-  }
-  .dark .video-difuminado video {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-}
-
 @layer utilities {
   /* Entrada de las secciones al hacer scroll */
   @supports (animation-timeline: view()) {

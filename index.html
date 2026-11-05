@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <link rel="preload" as="image" href="media/fotos/pendiente/f_001.webp" fetchpriority="high">
+
   <script>
     try {
       if (localStorage.getItem('tema') === 'oscuro') document.documentElement.classList.add('dark');
@@ -162,18 +164,27 @@
         <button id="interruptor-tema" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="interruptor"></button>
       </div>
     </nav>
-
-    <div id="menu-movil" data-abierto="false" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 data-[abierto=true]:grid-rows-[1fr] md:hidden">
-      <div class="overflow-hidden" inert>
-        <ul class="flex flex-col px-4 pb-3">
-          <li><a href="#nosotros" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Nosotros</a></li>
-          <li><a href="#productos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
-          <li><a href="#novedades" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
-          <li><a href="#visitanos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Visítanos</a></li>
-        </ul>
-      </div>
-    </div>
   </header>
+
+  <!-- Menú móvil a pantalla completa -->
+  <div id="menu-movil" data-abierto="false" inert
+       class="group invisible fixed inset-0 z-40 flex flex-col bg-rosa-mostrador pt-14 text-rotulo-oscuro opacity-0 transition-[opacity,visibility] duration-300 data-[abierto=true]:visible data-[abierto=true]:opacity-100 md:hidden dark:bg-azul-marino dark:text-papel">
+    <ul class="flex flex-1 flex-col justify-center px-6">
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-100 dark:border-papel/20">
+        <a href="#nosotros" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Nosotros</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-150 dark:border-papel/20">
+        <a href="#productos" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Productos</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-200 dark:border-papel/20">
+        <a href="#novedades" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Novedades</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-250 dark:border-papel/20">
+        <a href="#visitanos" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Visítanos</a>
+      </li>
+    </ul>
+    <p class="px-6 pb-8 text-sm font-medium tracking-wider uppercase">Bisutería de toda la vida</p>
+  </div>
   <!-- ===== FIN CABECERA ===== -->
 
   <main>
@@ -191,11 +202,9 @@
         </div>
         <p id="madrid" class="absolute inset-x-0 top-[40svh] z-30 text-center text-xs font-medium tracking-[0.25em] text-rotulo uppercase md:top-[43svh] md:text-sm dark:text-rosa-mostrador">Madrid</p>
 
-        <!-- Pendiente: el scroll mueve el vídeo -->
-        <div id="video-pendiente" class="video-difuminado pointer-events-none absolute top-[62%] left-1/2 z-20 aspect-square w-[min(88vw,62svh)] -translate-x-1/2 -translate-y-1/2 scale-[0.42] will-change-transform dark:overflow-hidden dark:rounded-full dark:bg-papel">
-          <video class="size-full object-contain" muted playsinline preload="auto" aria-label="Pendiente de plata girando">
-            <source src="media/fotos/videos/pendiente.webm" type="video/webm">
-          </video>
+        <!-- Pendiente: el scroll cambia el fotograma -->
+        <div id="pendiente" class="pointer-events-none absolute top-[62%] left-1/2 z-20 aspect-square w-[min(88vw,62svh)] -translate-x-1/2 -translate-y-1/2 scale-[0.42] will-change-transform dark:overflow-hidden dark:rounded-full dark:bg-papel">
+          <canvas id="secuencia-pendiente" width="720" height="720" class="size-full" role="img" aria-label="Pendiente de plata girando"></canvas>
         </div>
 
         <!-- Aviso de scroll -->
