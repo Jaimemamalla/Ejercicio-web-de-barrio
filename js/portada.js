@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const portada = document.querySelector('#portada');
   if (!portada) return;
 
-  const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reducirMovimiento || !window.gsap || !window.ScrollTrigger) return;
+  const sinAnimacion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || !window.gsap || !window.ScrollTrigger;
+  if (sinAnimacion) {
+    portada.dataset.animada = 'false';
+    return;
+  }
 
   const video = portada.querySelector('video');
   const logoNav = document.querySelector('#logo-nav');
@@ -46,9 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   addEventListener('touchstart', desbloquear, { passive: true });
 
-  /* Animación de los 4 pasos */
+  /* Animación: firma, pendiente, materiales y desaparición de la joya */
   const montar = () => {
-    portada.classList.remove('portada--estatica');
+    portada.dataset.animada = 'true';
     gsap.registerPlugin(ScrollTrigger);
     video.pause();
     requestAnimationFrame(suavizar);
@@ -56,13 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const mm = gsap.matchMedia();
 
     mm.add(
-      { escritorio: '(min-width: 768px)', movil: '(max-width: 767px)' },
+      { escritorio: '(min-width: 1024px)', movil: '(max-width: 1023px)' },
       (ctx) => {
         const { escritorio } = ctx.conditions;
 
-        gsap.set('#video-pendiente', { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.45, clipPath: 'circle(75% at 50% 50%)' });
+        gsap.set('#video-pendiente', { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.42 });
         gsap.set('#panel-materiales', { autoAlpha: 0, y: 30 });
-        gsap.set('#panel-escaparate', { autoAlpha: 0, y: 30 });
         gsap.set(logoNav, { autoAlpha: 0 });
 
         const tl = gsap.timeline({
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
           scrollTrigger: {
             trigger: portada,
             start: 'top top',
-            end: '+=250%',
+            end: '+=200%',
             scrub: 0.25,
             pin: true,
             anticipatePin: 1,
@@ -85,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .to(logoNav, { autoAlpha: 1, duration: 0.4 }, 0.4)
           .to('#video-pendiente', { scale: 1, y: escritorio ? '-1svh' : '-2svh', duration: 0.8 }, 0.1);
 
-        // Paso 2 a 3: el pendiente a la izquierda y entran los chips
+        // Paso 2 a 3: el pendiente se aparta y entran los materiales
         tl.to('#video-pendiente', {
             x: escritorio ? () => -window.innerWidth * 0.22 : 0,
             y: escritorio ? '-1svh' : '-18svh',
@@ -94,18 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 1.0)
           .to('#panel-materiales', { autoAlpha: 1, y: 0, duration: 0.5 }, 1.2);
 
-        // Paso 3 a 4: el pendiente se encoge hacia la fachada
+        // Paso 3 a 4: salen los materiales, la joya desaparece y sigue la página
         tl.to('#panel-materiales', { autoAlpha: 0, y: -24, duration: 0.4 }, 2.0)
-          .to('#video-pendiente', {
-            x: 0,
-            y: escritorio ? '-3svh' : '-2svh',
-            scale: escritorio ? 0.3 : 0.32,
-            clipPath: 'circle(50% at 50% 50%)',
-            duration: 0.7,
-          }, 2.0)
-          .to('#panel-escaparate', { autoAlpha: 1, y: 0, duration: 0.5 }, 2.3);
-
-        tl.to({}, { duration: 0.3 });
+          .to('#video-pendiente', { autoAlpha: 0, y: escritorio ? '-6svh' : '-23svh', duration: 0.5 }, 2.0)
+          .to({}, { duration: 0.3 });
       }
     );
   };

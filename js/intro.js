@@ -1,32 +1,31 @@
-// Intro: el logo se dibuja y después entra la web (se puede saltar con clic o tecla)
+// Intro: el logo brilla de izquierda a derecha y después entra la web
 
 (() => {
   const intro = document.getElementById('intro');
   const html = document.documentElement;
   if (!intro) return;
 
-  const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reducirMovimiento) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     intro.remove();
-    html.classList.remove('intro-activa');
+    html.classList.remove('overflow-hidden');
     return;
   }
 
-  let cerrada = false;
-  const cerrar = () => {
-    if (cerrada) return;
-    cerrada = true;
-    intro.classList.add('intro--sale');
-    html.classList.remove('intro-activa');
+  let terminada = false;
+  const entrar = () => {
+    if (terminada) return;
+    terminada = true;
+    intro.dataset.saliendo = 'true';
+    html.classList.remove('overflow-hidden');
     setTimeout(() => {
       intro.remove();
       if (window.ScrollTrigger) ScrollTrigger.refresh();
-    }, 650);
+    }, 750);
   };
 
-  intro.querySelector('.intro-logo').classList.add('dibujando');
-  setTimeout(cerrar, 2800);
-
-  intro.addEventListener('click', cerrar);
-  addEventListener('keydown', cerrar, { once: true });
+  document.getElementById('intro-brillo').addEventListener('animationend', () => setTimeout(entrar, 250), { once: true });
+  document.getElementById('intro-saltar').addEventListener('click', entrar);
+  intro.addEventListener('click', entrar);
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') entrar(); });
+  setTimeout(entrar, 3500);
 })();

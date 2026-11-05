@@ -1,146 +1,12 @@
-/* Estilos propios de Máximo Parra, organizados en capas */
+@layer theme, base, components, utilities;
 
-/* Tipografía */
+/* Tipografía del logo (solo se descarga si se usa font-titulo) */
 @font-face {
   font-family: "Buffet Script";
   src: url("../media/fonts/BuffetScript.woff2") format("woff2"),
        url("../media/fonts/BuffetScript.otf") format("opentype"),
        url("../media/fonts/BuffetScript.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
   font-display: swap;
-}
-
-@layer base {
-  /* Tokens modo claro */
-  :root {
-    --background: var(--color-papel);
-    --foreground: var(--color-tinta);
-    --card: var(--color-papel);
-    --card-foreground: var(--color-tinta);
-    --muted: var(--color-gris-50);
-    --muted-foreground: var(--color-gris-600);
-    --primary: var(--color-rotulo);
-    --primary-foreground: var(--color-papel);
-    --secondary: var(--color-rosa-mostrador);
-    --secondary-foreground: var(--color-rotulo-oscuro);
-    --accent: var(--color-azul-toldo);
-    --accent-foreground: var(--color-papel);
-    --brand: var(--color-rotulo);
-    --border: var(--color-gris-200);
-    --input: var(--color-gris-400);
-    --ring: var(--color-azul-toldo);
-  }
-
-  /* Tokens modo oscuro */
-  .dark {
-    --background: var(--color-azul-toldo);
-    --foreground: var(--color-papel);
-    --card: var(--color-azul-marino);
-    --card-foreground: var(--color-papel);
-    --muted: var(--color-azul-marino);
-    --muted-foreground: var(--color-azul-niebla);
-    --primary: var(--color-papel);
-    --primary-foreground: var(--color-azul-toldo);
-    --secondary: var(--color-azul-marino);
-    --secondary-foreground: var(--color-papel);
-    --accent: var(--color-rotulo);
-    --accent-foreground: var(--color-papel);
-    --brand: var(--color-rosa-mostrador);
-    --border: var(--color-azul-claro);
-    --input: var(--color-azul-claro);
-    --ring: var(--color-rotulo-claro);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-texto);
-  }
-
-  :focus-visible {
-    outline: 3px solid var(--ring);
-    outline-offset: 3px;
-  }
-}
-
-@layer components {
-  /* Etiqueta */
-  .etiqueta {
-    display: inline-block;
-    padding: 0.2rem 0.75rem;
-    border: 2px solid var(--brand);
-    background-color: var(--background);
-    color: var(--brand);
-    font-size: 1.125rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    box-shadow: 4px 4px 0 var(--brand);
-  }
-
-  /* Botón */
-  .boton {
-    display: inline-block;
-    padding: 0.85rem 1.75rem;
-    border: 2px solid var(--primary);
-    background-color: var(--background);
-    color: var(--primary);
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    box-shadow: 4px 4px 0 var(--primary);
-    transition: transform 0.15s ease, box-shadow 0.15s ease,
-      background-color 0.15s ease, color 0.15s ease;
-  }
-  .boton:hover {
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-  }
-  .boton:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 var(--primary);
-  }
-
-  /* Chip */
-  .chip {
-    display: inline-block;
-    padding: 0.35rem 1rem;
-    border: 2px solid var(--primary);
-    border-radius: 999px;
-    color: var(--primary);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: background-color 0.15s ease, color 0.15s ease;
-  }
-  .chip:hover,
-  .chip--activo {
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-  }
-
-  .firma {
-    font-family: var(--font-titulo);
-    color: var(--brand);
-    line-height: 0.95;
-  }
-
-  /* Cifras de Quiénes somos */
-  .cifra {
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--brand);
-  }
-}
-
-@layer utilities {
-  .text-balance { text-wrap: balance; }
-  .max-w-lectura { max-width: 70ch; }
 }
 
 /* Animaciones */
@@ -149,9 +15,14 @@
   50%      { transform: translateY(8px); }
 }
 
-@keyframes firma-aparece {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes intro-entra {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes brillo-cruza {
+  from { transform: translateX(0) skewX(-20deg); }
+  to   { transform: translateX(1900px) skewX(-20deg); }
 }
 
 @keyframes entrada-seccion {
@@ -159,64 +30,28 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@layer utilities {
-  .anim-flecha { animation: flecha-baja 1.6s ease-in-out infinite; }
-  .anim-firma  { animation: firma-aparece 0.9s ease-out both; }
-}
-
-/* Entrada de secciones al hacer scroll */
-@supports (animation-timeline: view()) {
-  .entra {
-    animation: entrada-seccion linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 55%;
+@layer components {
+  /* Vídeo del pendiente: bordes difuminados para que no se vea el cuadro */
+  .video-difuminado video {
+    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 52%, transparent 70%);
+    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 52%, transparent 70%);
+  }
+  .dark .video-difuminado video {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 
-/* Portada sin animación (sin JS o con reducir movimiento) */
-.portada--estatica .paso-1,
-.portada--estatica .paso-3 { display: none; }
-.portada--estatica .paso-4 { opacity: 1; visibility: visible; }
-.portada--estatica .video-pendiente { transform: translate(-50%, -50%) scale(0.3); }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .anim-flecha, .anim-firma, .entra { animation: none; }
-}
-
-/* Intro */
-.intro-activa { overflow: hidden; }
-.intro-activa .anim-firma { animation-play-state: paused; }
-
-.intro-logo {
-  fill: transparent;
-  stroke: var(--brand);
-  stroke-width: 3;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-.intro-activa .intro-logo,
-.intro-logo.dibujando {
-  animation:
-    logo-traza 1.8s cubic-bezier(.45, .05, .3, 1) forwards,
-    logo-relleno 0.6s ease 1.4s forwards;
-}
-
-@keyframes logo-traza   { to { stroke-dashoffset: 0; } }
-@keyframes logo-relleno { to { fill: var(--brand); } }
-
-#intro { transition: opacity 0.6s ease, transform 0.6s ease; }
-#intro.intro--sale { opacity: 0; transform: translateY(-4%); pointer-events: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  #intro { display: none; }
-}
-
-/* Vídeo del pendiente */
-.video-pendiente { will-change: transform, clip-path; }
-.video-pendiente video {
-  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 100%);
-  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 100%);
+@layer utilities {
+  /* Entrada de las secciones al hacer scroll */
+  @supports (animation-timeline: view()) {
+    .entra {
+      animation: entrada-seccion linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .entra { animation: none; }
+  }
 }
