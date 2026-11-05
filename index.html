@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth scroll-pt-14 overflow-hidden motion-reduce:scroll-auto">
+<html lang="es" class="group/intro scroll-smooth scroll-pt-14 overflow-hidden motion-reduce:scroll-auto">
 <head>
   <!-- ===== HEAD Y TEMA (compartido) ===== -->
   <meta charset="UTF-8">
@@ -11,10 +11,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <link rel="preload" as="image" href="media/fotos/pendiente/f_049.webp" fetchpriority="high">
+
   <script>
     try {
       if (localStorage.getItem('tema') === 'oscuro') document.documentElement.classList.add('dark');
     } catch (e) {}
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.4"></script>
@@ -121,13 +124,15 @@
     </defs>
   </svg>
 
-  <!-- ===== INTRO: el logo brilla y entra la web (Jaime) ===== -->
+  <!-- ===== INTRO: el logo brilla y una cortina lo levanta hacia la web (Jaime) ===== -->
+  <div id="intro-franja" data-saliendo="false" aria-hidden="true"
+       class="fixed inset-0 z-99 bg-rotulo transition-transform delay-100 duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:hidden data-[saliendo=true]:-translate-y-full"></div>
   <div id="intro" data-saliendo="false" role="dialog" aria-label="Bienvenida a Máximo Parra"
-       class="fixed inset-0 z-100 flex flex-col items-center justify-center gap-6 bg-papel transition-[opacity,translate] duration-700 ease-in motion-reduce:hidden data-[saliendo=true]:pointer-events-none data-[saliendo=true]:-translate-y-6 data-[saliendo=true]:opacity-0 dark:bg-azul-toldo">
+       class="fixed inset-0 z-100 flex flex-col items-center justify-center gap-6 bg-papel transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:hidden data-[saliendo=true]:pointer-events-none data-[saliendo=true]:-translate-y-full dark:bg-azul-toldo">
     <svg viewBox="0 0 1372 453" role="img" aria-label="Máximo Parra" class="w-[min(88vw,900px)] animate-[intro-entra_0.6s_ease-out_both]">
       <use href="#logo-path" class="fill-rotulo dark:fill-rosa-mostrador"/>
       <g clip-path="url(#logo-clip)">
-        <rect id="intro-brillo" x="-260" y="-60" width="220" height="580" fill="url(#brillo-grad)" class="animate-[brillo-cruza_1.3s_0.55s_cubic-bezier(0.45,0.05,0.3,1)_both]"/>
+        <rect id="intro-brillo" x="-260" y="-60" width="220" height="580" fill="url(#brillo-grad)" class="animate-[brillo-cruza_1.1s_0.5s_cubic-bezier(0.45,0.05,0.3,1)_both]"/>
       </g>
     </svg>
     <p class="flex gap-8 text-xs font-medium tracking-[0.25em] text-rotulo uppercase sm:text-sm dark:text-rosa-mostrador"><span>1941</span><span>Madrid</span></p>
@@ -162,18 +167,27 @@
         <button id="interruptor-tema" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="interruptor"></button>
       </div>
     </nav>
-
-    <div id="menu-movil" data-abierto="false" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 data-[abierto=true]:grid-rows-[1fr] md:hidden">
-      <div class="overflow-hidden" inert>
-        <ul class="flex flex-col px-4 pb-3">
-          <li><a href="#nosotros" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Nosotros</a></li>
-          <li><a href="#productos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
-          <li><a href="#novedades" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
-          <li><a href="#visitanos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Visítanos</a></li>
-        </ul>
-      </div>
-    </div>
   </header>
+
+  <!-- Menú móvil a pantalla completa -->
+  <div id="menu-movil" data-abierto="false" inert
+       class="group invisible fixed inset-0 z-40 flex flex-col bg-rosa-mostrador pt-14 text-rotulo-oscuro opacity-0 transition-[opacity,visibility] duration-300 data-[abierto=true]:visible data-[abierto=true]:opacity-100 md:hidden dark:bg-azul-marino dark:text-papel">
+    <ul class="flex flex-1 flex-col justify-center px-6">
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-100 dark:border-papel/20">
+        <a href="#nosotros" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Nosotros</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-150 dark:border-papel/20">
+        <a href="#productos" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Productos</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-200 dark:border-papel/20">
+        <a href="#novedades" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Novedades</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-250 dark:border-papel/20">
+        <a href="#visitanos" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Visítanos</a>
+      </li>
+    </ul>
+    <p class="px-6 pb-8 text-sm font-medium tracking-wider uppercase">Bisutería de toda la vida</p>
+  </div>
   <!-- ===== FIN CABECERA ===== -->
 
   <main>
@@ -181,40 +195,65 @@
     <section id="portada" class="group relative h-svh w-full overflow-hidden bg-papel dark:bg-azul-toldo" aria-label="Portada">
       <div class="relative h-full w-full">
 
-        <!-- Paso 1: firma -->
+        <!-- Escena 1: firma -->
         <div id="firma" class="absolute inset-x-0 top-[17svh] z-30 px-4 text-center md:top-[16svh]">
-          <p class="text-base tracking-widest text-rotulo md:text-lg dark:text-rosa-mostrador">1941</p>
+          <p class="translate-y-3 text-base tracking-widest text-rotulo opacity-0 transition delay-[800ms] duration-700 ease-out group-data-[listo=true]/intro:translate-y-0 group-data-[listo=true]/intro:opacity-100 md:text-lg dark:text-rosa-mostrador">1941</p>
           <h1 class="mx-auto w-[88vw] max-w-3xl -rotate-4 text-rotulo md:w-[62vw] lg:w-[54vw] dark:text-rosa-mostrador">
             <span class="sr-only">Máximo Parra</span>
-            <svg viewBox="0 0 1372 453" class="h-auto w-full fill-current" aria-hidden="true"><use href="#logo-path"/></svg>
+            <span class="block overflow-hidden" aria-hidden="true">
+              <svg viewBox="0 0 1372 453" class="block h-auto w-full translate-y-full fill-current transition-transform delay-[550ms] duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-data-[listo=true]/intro:translate-y-0"><use href="#logo-path"/></svg>
+            </span>
           </h1>
         </div>
-        <p id="madrid" class="absolute inset-x-0 top-[40svh] z-30 text-center text-xs font-medium tracking-[0.25em] text-rotulo uppercase md:top-[43svh] md:text-sm dark:text-rosa-mostrador">Madrid</p>
+        <p id="madrid" class="absolute inset-x-0 top-[43svh] z-30 text-center text-xs font-medium tracking-[0.25em] text-rotulo uppercase md:text-sm dark:text-rosa-mostrador"><span class="inline-block translate-y-3 opacity-0 transition delay-[1000ms] duration-700 ease-out group-data-[listo=true]/intro:translate-y-0 group-data-[listo=true]/intro:opacity-100">Madrid</span></p>
 
-        <!-- Pendiente: el scroll mueve el vídeo -->
-        <div id="video-pendiente" class="video-difuminado pointer-events-none absolute top-[62%] left-1/2 z-20 aspect-square w-[min(88vw,62svh)] -translate-x-1/2 -translate-y-1/2 scale-[0.42] will-change-transform dark:overflow-hidden dark:rounded-full dark:bg-papel">
-          <video class="size-full object-contain" muted playsinline preload="auto" aria-label="Pendiente de plata girando">
-            <source src="media/fotos/videos/pendiente.webm" type="video/webm">
-          </video>
+        <!-- Pendiente: el scroll lo gira y lo mueve por la pantalla -->
+        <div id="pendiente" class="pointer-events-none absolute top-[62%] left-1/2 z-20 aspect-square w-[min(88vw,62svh)] -translate-x-1/2 -translate-y-1/2 scale-[0.42] mix-blend-multiply will-change-transform dark:mix-blend-normal">
+          <div class="size-full opacity-0 transition-opacity delay-[1100ms] duration-1000 group-data-[listo=true]/intro:opacity-100 dark:overflow-hidden dark:rounded-full dark:bg-papel">
+            <canvas id="secuencia-pendiente" width="720" height="720" class="size-full" role="img" aria-label="Pendiente de plata girando"></canvas>
+          </div>
+        </div>
+
+        <!-- Escena 4: llamadas que señalan partes de la joya -->
+        <div id="llamadas" aria-hidden="true" class="pointer-events-none absolute top-[62%] left-1/2 z-30 aspect-square w-[min(88vw,62svh)] -translate-x-1/2 -translate-y-1/2 text-rotulo-oscuro dark:text-azul-toldo">
+          <div class="llamada absolute top-[21.5%] left-[58%] w-[29%]">
+            <span class="llamada-texto block pb-1 text-right text-[10px] font-medium tracking-[0.2em] whitespace-nowrap uppercase opacity-0 md:text-xs">Cierre omega</span>
+            <span class="llamada-linea block h-px w-full origin-left scale-x-0 bg-current"></span>
+          </div>
+          <div class="llamada absolute top-[53%] right-[71%] w-[22%]">
+            <span class="llamada-texto block pb-1 text-left text-[10px] font-medium tracking-[0.2em] whitespace-nowrap uppercase opacity-0 md:text-xs">Chapado</span>
+            <span class="llamada-linea block h-px w-full origin-right scale-x-0 bg-current"></span>
+          </div>
+          <div class="llamada absolute top-[73%] left-[66%] w-[24%]">
+            <span class="llamada-texto block pb-1 text-right text-[10px] font-medium tracking-[0.2em] whitespace-nowrap uppercase opacity-0 md:text-xs">Desde 1941</span>
+            <span class="llamada-linea block h-px w-full origin-left scale-x-0 bg-current"></span>
+          </div>
         </div>
 
         <!-- Aviso de scroll -->
         <div id="flecha" class="absolute inset-x-0 bottom-6 z-30 flex flex-col items-center gap-2 text-xs font-medium tracking-widest text-rotulo uppercase group-data-[animada=false]:hidden dark:text-rosa-mostrador">
-          <span>Desliza para ver el muestrario</span>
-          <svg width="14" height="24" viewBox="0 0 14 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-[flecha-baja_1.6s_ease-in-out_infinite] motion-reduce:animate-none" aria-hidden="true"><path d="M7 1v20M1 15l6 7 6-7"/></svg>
+          <span class="opacity-0 transition-opacity delay-[1500ms] duration-700 group-data-[listo=true]/intro:opacity-100">Desliza para ver el muestrario</span>
+          <svg width="14" height="24" viewBox="0 0 14 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-[flecha-baja_1.6s_ease-in-out_infinite] opacity-0 transition-opacity delay-[1500ms] duration-700 group-data-[listo=true]/intro:opacity-100 motion-reduce:animate-none" aria-hidden="true"><path d="M7 1v20M1 15l6 7 6-7"/></svg>
         </div>
 
-        <!-- Paso 3: materiales y cierres -->
+        <!-- Escena 2: materiales -->
         <div class="pointer-events-none absolute inset-0 z-30 flex items-end justify-center px-4 pb-8 lg:items-center lg:justify-end lg:pr-[7vw] lg:pb-0">
           <div id="panel-materiales" class="pointer-events-auto invisible w-full max-w-md bg-papel/90 p-4 opacity-0 lg:bg-transparent lg:p-0 dark:bg-azul-toldo/90 dark:lg:bg-transparent">
             <h2 class="mb-5 text-3xl font-bold md:text-5xl">Elige el tuyo</h2>
             <p class="etiqueta mb-3">Material</p>
-            <ul class="mb-5 flex flex-wrap gap-2">
+            <ul class="flex flex-wrap gap-2">
               <li><a href="#productos" class="chip">Plata</a></li>
               <li><a href="#productos" class="chip">Rodio</a></li>
               <li><a href="#productos" class="chip">Chapado</a></li>
               <li><a href="#productos" class="chip">Marcasita</a></li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Escena 3: cierres -->
+        <div class="pointer-events-none absolute inset-0 z-30 flex items-end justify-center px-4 pb-8 lg:items-center lg:justify-start lg:pb-0 lg:pl-[7vw]">
+          <div id="panel-cierres" class="pointer-events-auto invisible w-full max-w-md bg-papel/90 p-4 opacity-0 lg:bg-transparent lg:p-0 dark:bg-azul-toldo/90 dark:lg:bg-transparent">
+            <h2 class="mb-5 text-3xl font-bold md:text-5xl">Y su cierre</h2>
             <p class="etiqueta mb-3">Cierre</p>
             <ul class="flex flex-wrap gap-2">
               <li><a href="#productos" class="chip">Tornillo</a></li>
@@ -232,7 +271,7 @@
     <!-- ===== FIN PORTADA ===== -->
 
     <!-- ===== ESCAPARATE: te esperamos (Jaime) ===== -->
-    <section id="escaparate" class="entra relative z-10 -mt-[20svh] bg-papel px-4 pt-[calc(20svh+4rem)] pb-16 sm:px-6 md:pt-[calc(20svh+6rem)] md:pb-24 dark:bg-azul-toldo" aria-labelledby="titulo-escaparate">
+    <section id="escaparate" class="bg-papel px-4 py-16 sm:px-6 md:py-24 dark:bg-azul-toldo" aria-labelledby="titulo-escaparate">
       <div class="mx-auto flex max-w-4xl flex-col items-center gap-8 text-center md:gap-10">
         <h2 id="titulo-escaparate" class="text-3xl font-bold text-balance md:text-5xl">Te esperamos en el escaparate</h2>
         <div class="aspect-video w-full overflow-hidden bg-gris-50 dark:bg-azul-marino">
@@ -247,7 +286,7 @@
     <!-- ===== FIN ESCAPARATE ===== -->
 
     <!-- ===== HISTORIA: ¿QUIÉNES SOMOS? (Jaime) ===== -->
-    <section id="nosotros" class="entra mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:gap-14 md:py-24 lg:gap-20 lg:px-8" aria-labelledby="titulo-historia">
+    <section id="nosotros" class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:gap-14 md:py-24 lg:gap-20 lg:px-8" aria-labelledby="titulo-historia">
       <div class="aspect-[4/5] w-full overflow-hidden bg-gris-50 dark:bg-azul-marino">
         <img src="media/fotos/historia.jpg" alt="Pendiente de plata con piedra azul clara, de los muestrarios de Máximo Parra" class="size-full object-cover" onerror="this.remove()">
       </div>
