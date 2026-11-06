@@ -1,4 +1,4 @@
-/* Carrusel: pista con scroll ajustado, flechas, pausa y avance automático */
+/* Carrusel: pista con scroll ajustado, flechas y avance automático */
 (function () {
   var raices = document.querySelectorAll('[data-carrusel]');
   if (!raices.length) return;
@@ -13,7 +13,6 @@
     var controles = raiz.querySelector('[data-carrusel-controles]');
     var anterior = raiz.querySelector('[data-carrusel-anterior]');
     var siguiente = raiz.querySelector('[data-carrusel-siguiente]');
-    var pausa = raiz.querySelector('[data-carrusel-pausa]');
     var pie = raiz.querySelector('[data-carrusel-pie]');
     var cuenta = raiz.querySelector('[data-carrusel-cuenta]');
     var intervalo = Number(raiz.dataset.intervalo) || 5000;
@@ -21,7 +20,6 @@
     var actual = 0;
     var reloj = null;
     var asentando = null;
-    var pausadoPorUsuario = menosMovimiento.matches;
     var interactuando = false;
     var enPantalla = false;
 
@@ -41,7 +39,7 @@
 
     function programar() {
       parar();
-      if (pausadoPorUsuario || interactuando || !enPantalla || document.hidden) return;
+      if (menosMovimiento.matches || interactuando || !enPantalla || document.hidden) return;
       reloj = setTimeout(function () {
         ir(actual + 1);
         programar();
@@ -54,19 +52,12 @@
       actualizar();
     }
 
-    function fijarPausa(valor) {
-      pausadoPorUsuario = valor;
-      if (pausa) {
-        pausa.dataset.pausado = String(valor);
-        pausa.setAttribute('aria-label', valor ? 'Reanudar el avance automático' : 'Pausar el avance automático');
-      }
-      if (pie && pie.parentElement) pie.parentElement.setAttribute('aria-live', valor ? 'polite' : 'off');
-      programar();
+    function avisos() {
+      if (pie && pie.parentElement) pie.parentElement.setAttribute('aria-live', menosMovimiento.matches ? 'polite' : 'off');
     }
 
     if (anterior) anterior.addEventListener('click', function () { ir(actual - 1); });
     if (siguiente) siguiente.addEventListener('click', function () { ir(actual + 1); });
-    if (pausa) pausa.addEventListener('click', function () { fijarPausa(!pausadoPorUsuario); });
 
     pista.addEventListener('scroll', function () {
       clearTimeout(asentando);
@@ -95,7 +86,7 @@
     });
     document.addEventListener('visibilitychange', programar);
     if (menosMovimiento.addEventListener) {
-      menosMovimiento.addEventListener('change', function () { if (menosMovimiento.matches) fijarPausa(true); });
+      menosMovimiento.addEventListener('change', function () { avisos(); programar(); });
     }
 
     if ('IntersectionObserver' in window) {
@@ -111,6 +102,6 @@
 
     if (controles) controles.hidden = false;
     actualizar();
-    fijarPausa(pausadoPorUsuario);
+    avisos();
   });
 })();

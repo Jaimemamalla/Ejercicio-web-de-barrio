@@ -1,14 +1,5 @@
 @layer theme, base, components, utilities;
 
-/* Tipografía del logo (solo se descarga si se usa font-titulo) */
-@font-face {
-  font-family: "Buffet Script";
-  src: url("../media/fonts/BuffetScript.woff2") format("woff2"),
-       url("../media/fonts/BuffetScript.otf") format("opentype"),
-       url("../media/fonts/BuffetScript.ttf") format("truetype");
-  font-display: swap;
-}
-
 /* Animaciones */
 @keyframes flecha-baja {
   0%, 100% { transform: translateY(0); }
@@ -30,43 +21,62 @@
   50%      { transform: rotate(2.5deg); }
 }
 
-/* ===== HOVER CARDS DE PRODUCTOS ===== */
-.producto-card {
-  position: relative;
-  z-index: 1;
-  transition: transform 400ms ease;
-}
+/* Tarjeta de producto y etiqueta de precio (productos.html y novedades.html) */
+@layer components {
+  .producto-card {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 1px solid var(--color-gris-200);
+    border-radius: 0.25rem;
+    background-color: var(--color-papel);
+    transition: transform 400ms ease;
+  }
 
-.producto-card:hover {
-  transform: scale(1.04);
-  z-index: 10;
-}
+  .producto-card:hover {
+    z-index: 10;
+    transform: scale(1.04);
+  }
 
-.precio-producto {
-  display: inline-block;
-  transition:
-      transform 400ms ease,
-      background-color 400ms ease;
-}
-
-.producto-card:hover .precio-producto {
-  transform: rotate(-6deg);
-  background-color: var(--color-rotulo);
-  border-color: var(--color-rotulo);
-  color: var(--color-papel);
-}
-
-.dark .producto-card:hover .precio-producto {
-  transform: rotate(-6deg);
-  background-color: var(--color-papel);
-  border-color: var(--color-papel);
-  color: var(--color-azul-marino);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .producto-card,
   .precio-producto {
+    display: inline-block;
+    border: 2px solid var(--color-rotulo);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: var(--color-rotulo);
+    rotate: 6deg;
+    transition: rotate 400ms ease, background-color 400ms ease, border-color 400ms ease, color 400ms ease;
+  }
+
+  .producto-card:hover .precio-producto {
+    rotate: 0deg;
+    border-color: var(--color-rotulo);
+    background-color: var(--color-rotulo);
+    color: var(--color-papel);
+  }
+
+  .dark .producto-card {
+    border-color: color-mix(in srgb, var(--color-papel) 20%, transparent);
+    background-color: var(--color-azul-marino);
+  }
+
+  .dark .precio-producto {
+    border-color: var(--color-papel);
+    color: var(--color-papel);
+  }
+
+  .dark .producto-card:hover .precio-producto {
+    border-color: var(--color-papel);
+    background-color: var(--color-papel);
+    color: var(--color-azul-marino);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .producto-card,
+    .precio-producto {
       transition: none;
+    }
   }
 }
-

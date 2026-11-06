@@ -4,16 +4,15 @@
   <!-- ===== HEAD Y TEMA (compartido) ===== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Máximo Parra, bisutería de toda la vida en Madrid</title>
-  <meta name="description" content="Máximo Parra, bisutería, plata y complementos en Madrid desde 1941.">
+  <title>Novedades y ofertas, Máximo Parra, bisutería en Madrid</title>
+  <meta name="description" content="Lo recién llegado y las ofertas de Máximo Parra, bisutería en Madrid desde 1941.">
+  <link rel="icon" type="image/svg+xml" href="media/logo/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Fuente: NEUE HAAS GROTESK + BUFFET SCRIPT -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Adobe Fonts: Buffet Script -->
   <link rel="stylesheet" href="https://use.typekit.net/rxe6ems.css">
-
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
   <script>
     try {
@@ -42,7 +41,7 @@
       --color-gris-400: #BEBEBE;
       --color-gris-600: #6E6E6E;
 
-      --font-titulo: "Buffet Script", cursive;
+      --font-titulo: "buffet-script", "Brush Script MT", "Segoe Script", cursive;
       --font-texto: "Hanken Grotesk", sans-serif;
     }
 
@@ -55,7 +54,7 @@
           shadow-[4px_4px_0_var(--color-rotulo)]
           transition-[translate,box-shadow] duration-200 ease-out
           before:absolute before:inset-y-0 before:-left-1/4 before:-z-10 before:w-[150%] before:-translate-x-full before:-skew-x-[20deg] before:bg-rosa-mostrador before:transition-transform before:duration-500 before:ease-out
-          after:absolute after:inset-y-0 after:left-0 after:-z-10 after:w-1/5 after:-translate-x-full after:-skew-x-[20deg] after:bg-linear-to-r after:from-transparent after:via-white after:to-transparent after:transition-transform after:delay-100 after:duration-700 after:ease-out
+          after:absolute after:inset-y-0 after:left-0 after:-z-10 after:w-1/5 after:-translate-x-full after:-skew-x-[20deg] after:bg-linear-to-r after:from-transparent after:via-papel after:to-transparent after:transition-transform after:delay-100 after:duration-700 after:ease-out
           hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_var(--color-rotulo)] hover:before:translate-x-0 hover:after:translate-x-[700%]
           focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo focus-visible:before:translate-x-0
           active:translate-x-1 active:translate-y-1 active:shadow-none
@@ -74,7 +73,7 @@
 
         > span { @apply block leading-6 transition-transform duration-300 ease-out; }
         > span:last-child { @apply absolute inset-x-0 top-full text-tinta dark:text-rosa-mostrador; }
-        &:hover > span, &:focus-visible > span { @apply -translate-y-full; }
+        &:hover > span, &:focus-visible > span, &[aria-current='page'] > span { @apply -translate-y-full; }
       }
 
       /* Etiqueta con sombra */
@@ -94,6 +93,27 @@
           dark:border-papel dark:bg-transparent dark:text-papel dark:hover:bg-papel dark:hover:text-azul-toldo dark:aria-pressed:bg-papel dark:aria-pressed:text-azul-toldo dark:focus-visible:outline-rotulo-claro;
       }
 
+      /* Título de sección: 34 px en móvil, 44 px en tablet y 56 px en escritorio */
+      .titulo-seccion {
+        @apply text-[2.125rem] leading-[1.1] font-semibold tracking-[-0.01em] md:text-[2.75rem] md:leading-[1.05] md:tracking-[-0.02em] xl:text-[3.5rem];
+      }
+
+      /* Tarjeta con borde */
+      .tarjeta {
+        @apply border-2 border-rotulo bg-papel dark:border-papel dark:bg-azul-toldo;
+      }
+
+      /* Botón redondo del carrusel */
+      .flecha-carrusel {
+        @apply grid size-11 shrink-0 cursor-pointer place-items-center rounded-full border-2 border-rotulo bg-papel text-rotulo
+          transition-colors duration-200
+          hover:bg-rotulo hover:text-papel
+          focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo
+          dark:border-papel dark:bg-azul-toldo dark:text-papel dark:hover:bg-papel dark:hover:text-azul-toldo dark:focus-visible:outline-rotulo-claro;
+
+        > svg { @apply size-5; }
+      }
+
       /* Interruptor de modo oscuro */
       .interruptor {
         @apply relative inline-flex h-7 w-12 shrink-0 cursor-pointer items-center rounded-full border-2 border-rotulo bg-papel
@@ -102,48 +122,29 @@
           focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo
           dark:border-papel dark:bg-azul-toldo dark:after:translate-x-5 dark:after:bg-papel dark:focus-visible:outline-rotulo-claro;
       }
-        /* Animación enlaces del footer */
-        .enlace-footer {
-            @apply relative inline-block w-fit;
 
-            &::after {
-             content: "";
-            @apply absolute bottom-0 left-0 h-px w-full bg-current;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 300ms ease;
-            }
+      /* Enlace del pie: el mismo movimiento que .enlace-nav sobre fondo de color */
+      .enlace-footer {
+        @apply relative inline-flex h-6 overflow-hidden text-sm font-medium tracking-wider text-papel uppercase
+          focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-papel;
 
-            &:hover::after,
-            &:focus-visible::after {
-            transform: scaleX(1);
-            }
-
-            &:not(:hover):not(:focus-visible)::after {
-            transform-origin: right;
-            }
-    }   
-      
+        > span { @apply block leading-6 transition-transform duration-300 ease-out; }
+        > span:last-child { @apply absolute inset-x-0 top-full text-papel dark:text-rosa-mostrador; }
+        &:hover > span, &:focus-visible > span, &[aria-current='page'] > span { @apply -translate-y-full; }
+      }
     }
   </style>
 
   <link rel="stylesheet" href="css/styles.css">
-  <noscript><style>html{overflow:auto!important}#intro{display:none}</style></noscript>
   <!-- ===== FIN HEAD Y TEMA ===== -->
 </head>
 
-<body class="min-h-screen flex flex-col bg-papel font-texto text-tinta antialiased dark:bg-azul-toldo dark:text-papel">
+<body class="flex min-h-screen flex-col bg-papel font-texto text-tinta antialiased dark:bg-azul-toldo dark:text-papel">
 
-  <!-- Logo y destello reutilizables con <use href="#logo-path"> -->
+  <!-- Logo reutilizable con <use href="#logo-path"> -->
   <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
     <defs>
       <path id="logo-path" d="M261.723 148.85C261.923 148.345 261.902 148.103 261.859 147.62C261.669 145.444 258.768 145.698 258.768 145.698C237.733 147.538 168.524 275.406 107.143 356.3C101.008 364.145 99.442 365.744 92.6723 366.336C85.1773 366.992 78.5859 366.838 78.1417 361.76C77.9514 359.584 78.9699 357.303 78.9699 357.303C165.738 215.718 191.521 167.904 192.34 166.127C192.34 166.127 192.277 165.402 191.793 165.444C191.068 165.507 190.406 166.296 190.406 166.296C145.825 210.882 79.772 243.947 41.0881 247.331C29.9665 248.304 11.3589 247.252 10.6397 239.032C10.3859 236.131 12.6224 231.062 15.5237 230.809C19.1503 230.491 19.5128 240.205 47.0751 237.793C101.233 233.055 182.403 180.639 214.396 128.628C214.816 127.86 215.521 127.555 216.246 127.492C218.422 127.301 221.251 129.003 221.483 131.662C221.547 132.388 221.389 133.376 220.969 134.144C186.165 198.582 148.49 280.326 135.803 302.387C136.044 302.366 138.199 301.934 139.523 300.356C171.09 257.396 241.602 127.71 272.791 124.981C276.901 124.621 282.033 127.583 282.456 132.419C282.561 133.627 282.184 134.879 281.806 136.13C276.021 150.766 251.671 203.814 225.26 255.581C226.468 255.475 226.91 254.949 227.75 253.414C240.123 233.329 308.165 125.54 337.178 123.002C341.53 122.621 346.976 123.607 347.378 128.2C347.463 129.167 347.306 130.156 346.907 131.165C341.282 150.416 264.795 331.544 270.591 397.79C271.966 413.505 278.152 422.953 290.966 421.832C310.791 420.097 328.432 401.744 333.346 371.591C333.839 368.868 336.329 366.701 338.747 366.49C340.681 366.321 342.48 367.382 342.755 370.525C343.579 379.954 333.427 425.425 281.929 429.931C256.301 432.173 245.488 419.963 243.669 399.171C238.571 340.903 305.269 214.961 323.778 148.05C323.651 146.599 322.116 145.759 320.181 145.928C291.41 148.445 211.828 302.557 176.417 351.701C170.545 359.767 168.716 361.145 161.947 361.737C154.452 362.393 147.86 362.239 147.416 357.161C147.226 354.985 148.244 352.704 148.244 352.704C147.948 349.319 172.096 310.662 172.316 310.399C246.071 189.93 257.556 159.69 261.723 148.85ZM445.321 168.357C451.849 167.785 456.34 171.778 456.72 176.13C456.974 179.031 455.294 182.101 451.595 184.374C442.589 190.035 410.039 205.063 408.831 205.169C407.138 205.317 405.845 204.456 405.76 203.489C405.697 202.764 406.117 201.996 407.504 201.144C427.523 187.698 438.231 179.209 445.321 168.357ZM426.428 283.782C405.819 315.551 386.894 330.363 374.564 331.442C366.827 332.118 361.768 327.201 360.922 317.53C360.372 311.244 361.587 302.855 365.44 293.991C365.377 293.265 364.851 292.824 364.126 292.887C363.642 292.93 363.18 293.214 362.297 294.266C356.782 300.839 329.781 331.949 310.681 333.62C301.493 334.424 296.981 330.189 296.326 322.694C293.809 293.923 349.306 218.173 411.925 212.695C419.42 212.039 421.765 213.783 421.998 216.442C422.4 221.036 415.917 227.694 414.708 227.799C414.225 227.842 413.726 219.358 402.363 220.353C360.294 224.033 317.638 290.62 319.119 307.545C319.352 310.204 320.709 311.791 323.368 311.558C342.71 309.866 367.136 279.956 377.242 267.377C384.68 257.713 401.571 233.578 407.331 232.586C408.761 232.218 410.674 231.807 412.85 231.616C417.202 231.236 421.375 231.601 421.545 233.536C421.587 234.019 421.366 234.282 421.167 234.787C419.665 237.111 415.231 242.128 410.861 247.87C399.452 262.267 377.58 290.736 379.505 312.737C380.055 319.023 382.264 321.997 385.649 321.701C392.661 321.088 405.562 307.047 424.618 279.799C424.618 279.799 426.615 280.355 426.763 282.048C426.806 282.531 426.848 283.015 426.428 283.782ZM412.489 332.509C412.489 332.509 408.684 333.572 405.541 333.847C403.365 334.038 401.389 333.723 401.283 332.515C401.177 331.306 402.921 328.961 407.681 324.89C421.982 312.919 435.253 300.308 448.375 286.004C451.274 260.657 462.033 230.481 464.974 225.107C462.988 227.473 451.927 243.059 447.883 249.747C439.774 262.881 431.046 277.288 421.97 290.507C421.97 290.507 419.51 290.235 419.362 288.542C419.299 287.817 419.698 286.807 420.78 285.251L424.688 279.793C433.385 267.825 445.127 246.09 457.418 230.641C466.842 218.609 473.714 213.623 484.594 212.671C486.045 212.544 487.033 212.701 487.16 214.152C487.244 215.119 485.742 217.443 484.66 219C481.236 224.415 475.862 240.965 472.088 259.08C487.09 241.2 502.89 221.303 521.317 198.008C521.317 198.008 524.239 197.996 524.387 199.688C524.429 200.172 524.272 201.16 523.39 202.212C512.486 216.809 491.874 242.975 470.274 268.983C468.325 280.117 467.342 291.166 468.062 299.386C468.844 308.332 471.791 314.165 477.593 313.657C484.499 311.835 497.507 299.003 516.562 271.755C516.562 271.755 518.559 272.311 518.708 274.004C518.75 274.487 518.792 274.971 518.372 275.738C497.763 307.507 478.838 322.319 466.508 323.397C454.177 324.476 449.022 315.67 447.922 303.097C447.71 300.68 447.719 297.999 447.728 295.318C434.428 310.368 421.946 323.642 412.489 332.509ZM500.642 307.255C498.823 286.463 531.016 233.947 544.915 217.382C550.231 211.314 551.198 211.229 557.968 210.637C562.32 210.256 565.043 210.749 565.212 212.683C565.254 213.167 565.034 213.43 564.834 213.934C551.273 234.367 520.045 281.195 521.716 300.295C522.266 306.582 524.475 309.555 527.86 309.259C534.871 308.646 547.773 294.605 566.828 267.357C566.828 267.357 568.826 267.913 568.974 269.606C569.016 270.089 569.059 270.573 568.639 271.341C547.61 303.877 527.276 319.299 514.462 320.42C506.726 321.097 501.446 316.443 500.642 307.255ZM557.321 180.971C556.327 169.608 566.098 158.764 576.978 157.812C585.44 157.072 591.771 162.609 592.448 170.346C593.443 181.709 583.672 192.553 572.55 193.526C564.088 194.266 558.019 188.95 557.321 180.971ZM604.284 302.817C603.244 304.857 599.176 305.7 596.275 305.954C592.648 306.271 586.057 306.117 585.74 302.49C585.634 301.281 586.253 300.009 587.535 297.948C596.653 285.212 612.133 256.085 620.25 240.27C620.187 239.545 619.703 239.587 619.22 239.629C602.105 258.424 584.359 275.569 568.927 296.896C564.472 301.671 557.645 312.744 550.15 313.4C545.315 313.823 541.897 310.955 541.41 305.394L597.708 213.738C600.755 209.573 602.668 209.162 608.229 208.676C612.097 208.337 616.25 208.461 616.44 210.637C616.482 211.121 616.262 211.384 616.062 211.889C616.062 211.889 596.336 242.606 581.025 273.668C591.174 261.573 619.459 234.005 640.4 214.388C643.993 210.907 648.019 209.58 651.162 209.305C655.03 208.967 657.817 210.185 657.943 211.635C657.986 212.119 657.786 212.623 657.324 212.908C646.208 225.087 636.673 244.193 628.428 258.557C649.956 234.504 691.07 194.85 707.027 193.454C707.994 193.37 708.32 194.316 708.426 195.525C708.595 197.459 708.103 200.182 707.64 200.466C690.166 215.15 660.696 268.159 662.43 287.985C662.98 294.271 665.19 297.245 668.574 296.948C675.586 296.335 688.488 282.294 707.543 255.046C707.543 255.046 709.541 255.602 709.689 257.295C709.731 257.778 709.773 258.262 709.353 259.03C688.745 290.799 669.82 305.61 657.489 306.689C649.752 307.366 642.529 305.561 641.683 295.89C640.076 277.515 663.298 239.427 680.202 218.215C680.643 217.689 680.864 217.426 680.842 217.184C680.821 216.942 680.579 216.964 680.338 216.985C672.359 217.683 622.462 268.337 604.284 302.817ZM780.803 209.657C780.57 206.997 779.455 205.39 777.037 205.601C766.641 206.511 756.701 234.91 758.33 253.527C758.478 255.219 758.605 256.67 758.973 258.099C771.999 239.906 781.564 218.361 780.803 209.657ZM786.031 197.018C792.076 196.489 795.01 199.4 795.476 204.719C796.618 217.775 782.861 244.315 762.636 266.549C764.782 268.798 767.547 269.774 770.932 269.478C778.669 268.801 788.914 260.596 798.21 247.114C798.21 247.114 800.45 247.649 800.598 249.341C800.64 249.825 800.441 250.33 800.02 251.097C790.915 266.755 778.01 275.193 766.888 276.166C762.536 276.547 758.583 275.918 755.25 274.017C739.752 289.016 721.277 300.621 702.902 302.228C692.748 303.117 687.646 297.716 686.885 289.012C684.241 258.79 731.614 187.649 792.541 182.318C800.52 181.62 803.128 183.585 803.361 186.244C803.699 190.113 798.561 195.435 797.353 195.54C796.869 195.583 794.343 188.982 782.979 189.976C750.098 192.853 706.608 252.692 708.723 276.869C709.315 283.639 713.565 287.653 722.51 286.87C731.456 286.087 741.06 278.913 749.728 269.384C746.993 265.969 745.34 260.997 744.811 254.953C742.844 232.468 760.403 199.26 786.031 197.018ZM918.15 88.4966C918.15 88.4966 918.086 87.7712 917.603 87.8135C916.877 87.877 916.899 88.1188 916.216 88.6658C894.722 115.883 852.767 137.582 814.084 140.966C802.962 141.939 784.354 140.888 783.635 132.667C783.381 129.766 785.618 124.698 788.519 124.444C792.146 124.127 792.508 133.84 820.071 131.429C862.381 127.727 912.658 100.915 934.385 56.8666C935.005 55.5943 935.225 55.3314 936.193 55.2468C938.127 55.0775 941.24 57.2414 941.472 59.901C941.536 60.6263 941.379 61.6145 940.958 62.3822C938.311 65.5373 917.122 112.949 892.584 169.424C892.584 169.424 875.638 209.643 874.179 212.451C874.179 212.451 874.263 213.418 875.714 213.291C937.147 91.2198 967.844 32.744 1001.93 29.7615C1014.75 28.6404 1021.09 37.0995 1022.34 51.3642C1027.37 108.907 950.062 261.115 878.497 267.376C872.452 267.905 864.021 266.206 863.576 261.129C863.428 259.436 864.383 256.429 866.076 256.281C866.318 256.26 866.822 256.46 867.327 256.659C871.712 259.443 874.414 259.693 879.491 259.249C942.353 253.75 1005.39 99.867 1001.45 54.8969C1000.76 46.9183 997.673 42.3155 992.354 42.7809C965.275 45.15 920.963 140.143 843.986 290.616C839.628 299.281 837.328 303.623 830.317 304.237C824.272 304.766 811.951 303.164 811.507 298.086C811.422 297.119 811.338 296.152 813.039 293.324C836.05 252.818 889.789 151.397 918.15 88.4966ZM1081.86 226.439C1061.25 258.208 1042.33 273.02 1030 274.098C1022.26 274.775 1017.2 269.858 1016.36 260.187C1015.81 253.901 1017.02 245.511 1020.88 236.647C1020.81 235.922 1020.29 235.481 1019.56 235.544C1019.08 235.587 1018.62 235.871 1017.73 236.922C1012.22 243.496 985.217 274.606 966.116 276.277C956.929 277.08 952.417 272.846 951.761 265.351C949.244 236.58 1004.74 160.83 1067.36 155.351C1074.86 154.696 1077.2 156.439 1077.43 159.099C1077.84 163.693 1071.35 170.35 1070.14 170.456C1069.66 170.499 1069.16 162.015 1057.8 163.009C1015.73 166.69 973.074 233.277 974.555 250.201C974.787 252.861 976.144 254.448 978.804 254.215C998.146 252.523 1022.57 222.612 1032.68 210.034C1040.12 200.369 1057.01 176.234 1062.77 175.243C1064.2 174.875 1066.11 174.464 1068.29 174.273C1072.64 173.892 1076.81 174.258 1076.98 176.192C1077.02 176.676 1076.8 176.939 1076.6 177.444C1075.1 179.768 1070.67 184.784 1066.3 190.526C1054.89 204.924 1033.02 233.393 1034.94 255.394C1035.49 261.68 1037.7 264.654 1041.08 264.358C1048.1 263.745 1061 249.704 1080.05 222.456C1080.05 222.456 1082.05 223.012 1082.2 224.704C1082.24 225.188 1082.28 225.672 1081.86 226.439ZM1115.77 148.192C1115.39 143.84 1112.43 143.369 1109.04 143.665C1103.24 144.173 1099.31 149.389 1099.82 155.191C1100.22 159.785 1103.57 164.609 1110.9 167.622C1114.31 159.284 1116.13 152.302 1115.77 148.192ZM1114.45 266.71C1102.84 267.725 1097.85 263.533 1097.26 256.764C1095.67 238.631 1124.3 201.044 1138.74 185.163C1126.95 184.002 1117.73 181.642 1110.9 178.828C1101.92 195.936 1089.51 215.538 1077.41 233.163C1077.41 233.163 1074.95 232.891 1074.8 231.199C1074.73 230.474 1075.13 229.464 1076.22 227.908L1080.12 222.45C1090.3 207.916 1100.05 191.228 1106.84 176.99C1096.91 172.013 1092.45 165.582 1091.9 159.295C1090.9 147.932 1102.85 136.898 1117.11 135.65C1121.71 135.248 1123.85 137.497 1124.21 141.607C1124.72 147.41 1121.43 157.198 1115.88 168.891C1120.36 169.961 1125.98 170.2 1132.99 169.586C1149.43 168.148 1161.82 164.872 1161.82 164.872C1161.82 164.872 1165.97 164.996 1166.18 167.414C1166.22 167.897 1166.04 168.644 1165.62 169.412C1142.07 195.348 1118.08 233.016 1119.39 248.006C1119.94 254.292 1122.15 257.266 1125.53 256.97C1132.55 256.356 1145.45 242.315 1164.5 215.068C1164.5 215.068 1166.5 215.624 1166.65 217.316C1166.69 217.8 1166.73 218.283 1166.31 219.051C1145.7 250.82 1126.78 265.631 1114.45 266.71ZM1200.06 140.818C1199.68 136.466 1196.72 135.994 1193.33 136.29C1187.53 136.798 1183.6 142.014 1184.11 147.817C1184.51 152.411 1187.86 157.234 1195.19 160.247C1198.6 151.909 1200.42 144.928 1200.06 140.818ZM1198.74 259.336C1187.13 260.351 1182.14 256.159 1181.55 249.389C1179.96 231.256 1208.59 193.67 1223.03 177.788C1211.24 176.628 1202.02 174.267 1195.19 171.454C1186.21 188.562 1173.8 208.164 1161.7 225.789C1161.7 225.789 1159.24 225.517 1159.09 223.824C1159.02 223.099 1159.42 222.09 1160.51 220.533L1164.41 215.075C1174.59 200.542 1184.34 183.853 1191.13 169.616C1181.2 164.638 1176.74 158.207 1176.19 151.921C1175.19 140.558 1187.14 129.524 1201.4 128.276C1206 127.874 1208.14 130.122 1208.5 134.233C1209.01 140.035 1205.72 149.824 1200.17 161.517C1204.65 162.587 1210.27 162.825 1217.28 162.212C1233.72 160.774 1246.11 157.498 1246.11 157.498C1246.11 157.498 1250.26 157.622 1250.47 160.039C1250.51 160.523 1250.33 161.269 1249.91 162.037C1226.36 187.973 1202.37 225.641 1203.68 240.631C1204.23 246.917 1206.44 249.891 1209.82 249.595C1216.84 248.982 1229.74 234.941 1248.79 207.693C1248.79 207.693 1250.79 208.249 1250.94 209.942C1250.98 210.425 1251.02 210.909 1250.6 211.676C1229.99 243.445 1211.07 258.257 1198.74 259.336ZM1358.35 202.25C1337.74 234.019 1318.81 248.83 1306.48 249.909C1298.74 250.586 1293.69 245.669 1292.84 235.998C1292.29 229.712 1293.5 221.322 1297.36 212.458C1297.29 211.733 1296.77 211.292 1296.04 211.355C1295.56 211.398 1295.1 211.682 1294.21 212.733C1288.7 219.306 1261.7 250.416 1242.6 252.088C1233.41 252.891 1228.9 248.657 1228.24 241.162C1225.73 212.391 1281.22 136.641 1343.84 131.162C1351.34 130.507 1353.68 132.25 1353.92 134.91C1354.32 139.504 1347.84 146.161 1346.63 146.267C1346.14 146.309 1345.64 137.826 1334.28 138.82C1292.21 142.501 1249.56 209.088 1251.04 226.012C1251.27 228.672 1252.63 230.258 1255.29 230.026C1274.63 228.334 1299.05 198.423 1309.16 185.845C1316.6 176.18 1333.49 152.045 1339.25 151.054C1340.68 150.685 1342.59 150.274 1344.77 150.084C1349.12 149.703 1353.29 150.069 1353.46 152.003C1353.5 152.487 1353.28 152.75 1353.08 153.254C1351.58 155.579 1347.15 160.595 1342.78 166.337C1331.37 180.735 1309.5 209.204 1311.42 231.205C1311.97 237.491 1314.18 240.465 1317.57 240.169C1324.58 239.555 1337.48 225.515 1356.54 198.267C1356.54 198.267 1358.53 198.823 1358.68 200.515C1358.72 200.999 1358.77 201.482 1358.35 202.25Z"/>
-      <clipPath id="logo-clip"><use href="#logo-path"/></clipPath>
-      <linearGradient id="brillo-grad" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
-        <stop offset="0.5" stop-color="#fff" stop-opacity="0.95"/>
-        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-      </linearGradient>
     </defs>
   </svg>
 
@@ -157,7 +158,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden size-6 group-aria-expanded:block" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
         <ul class="hidden items-center gap-8 md:flex">
-          <li><a href="#nosotros" class="enlace-nav"><span>Nosotros</span><span aria-hidden="true">Nosotros</span></a></li>
+          <li><a href="index.html#nosotros" class="enlace-nav"><span>Nosotros</span><span aria-hidden="true">Nosotros</span></a></li>
           <li><a href="productos.html" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
         </ul>
       </div>
@@ -168,132 +169,115 @@
 
       <div class="flex items-center justify-end gap-8">
         <ul class="hidden items-center gap-8 md:flex">
-          <li><a href="novedades.html" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
-          <li><a href="#visitanos" class="enlace-nav"><span>Visítanos</span><span aria-hidden="true">Visítanos</span></a></li>
+          <li><a href="novedades.html" aria-current="page" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
+          <li><a href="index.html#visitanos" class="enlace-nav"><span>Visítanos</span><span aria-hidden="true">Visítanos</span></a></li>
         </ul>
         <button id="interruptor-tema" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="interruptor"></button>
       </div>
     </nav>
-
-    <div id="menu-movil" data-abierto="false" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 data-[abierto=true]:grid-rows-[1fr] md:hidden">
-      <div class="overflow-hidden" inert>
-        <ul class="flex flex-col px-4 pb-3">
-          <li><a href="#nosotros" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Nosotros</a></li>
-          <li><a href="productos.html" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
-          <li><a href="novedades.html" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
-          <li><a href="#visitanos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Visítanos</a></li>
-        </ul>
-      </div>
-    </div>
   </header>
+
+  <!-- Menú móvil a pantalla completa -->
+  <div id="menu-movil" data-abierto="false" inert
+       class="group invisible fixed inset-0 z-40 flex flex-col bg-rosa-mostrador pt-14 text-rotulo-oscuro opacity-0 transition-[opacity,visibility] duration-300 data-[abierto=true]:visible data-[abierto=true]:opacity-100 md:hidden dark:bg-azul-marino dark:text-papel">
+    <ul class="flex flex-1 flex-col justify-center px-6">
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-100 dark:border-papel/20">
+        <a href="index.html#nosotros" class="block py-5 aria-[current=page]:text-tinta dark:aria-[current=page]:text-rosa-mostrador text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Nosotros</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-150 dark:border-papel/20">
+        <a href="productos.html" class="block py-5 aria-[current=page]:text-tinta dark:aria-[current=page]:text-rosa-mostrador text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Productos</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-200 dark:border-papel/20">
+        <a href="novedades.html" aria-current="page" class="block py-5 aria-[current=page]:text-tinta dark:aria-[current=page]:text-rosa-mostrador text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Novedades</a>
+      </li>
+      <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-250 dark:border-papel/20">
+        <a href="index.html#visitanos" class="block py-5 aria-[current=page]:text-tinta dark:aria-[current=page]:text-rosa-mostrador text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Visítanos</a>
+      </li>
+    </ul>
+    <p class="px-6 pb-8 text-sm font-medium tracking-wider uppercase">Bisutería de toda la vida</p>
+  </div>
   <!-- ===== FIN CABECERA ===== -->
 
-<!-- ===== NOVEDADES ===== -->
-<section id="novedades" class="mx-auto w-full max-w-7xl px-4 pt-24 pb-16 sm:px-6 md:pt-28 md:pb-24 lg:px-8">
+  <main id="contenido">
+    <!-- ===== NOVEDADES (Martina) ===== -->
+    <section id="novedades" class="mx-auto w-full max-w-7xl px-4 pt-24 pb-16 sm:px-6 md:pt-28 md:pb-24 lg:px-8" aria-labelledby="titulo-novedades">
+      <h1 id="titulo-novedades" class="mb-6 text-4xl font-bold text-balance text-rotulo md:text-5xl dark:text-rosa-mostrador">Recién llegado</h1>
 
-    <h1 class="mb-6 text-4xl font-bold text-balance text-rotulo md:text-5xl dark:text-rosa-mostrador">Recién llegado</h1>
-
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5 lg:gap-6">
-        <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
-
-            <div class="relative">
-                <img src="media/joyas/broche_plata.webp" alt="#">
-                <span class="absolute left-3 top-3 z-10 bg-azul-toldo px-3 py-1 text-sm font-bold text-white uppercase">Nuevo</span>
-            </div>
-        
-            <div class="p-3 sm:p-4">
-                <p class="font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
-
-                <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Broche Lazo de Marquesitas</h3>
-        
-                <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
-        
-                <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">24,90€</p>
-            </div>
+      <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+        <article class="producto-card">
+          <div class="relative">
+            <img src="media/joyas/broche_plata.webp" alt="Broche Lazo de Marquesitas" width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="absolute top-3 left-3 z-10 bg-azul-toldo px-3 py-1 text-sm font-bold text-papel uppercase">Nuevo</span>
+          </div>
+          <div class="p-3 sm:p-4">
+            <p class="mb-1 font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
+            <h2 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Broche Lazo de Marquesitas</h2>
+            <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
+            <p class="precio-producto">24,90 €</p>
+          </div>
         </article>
 
-        <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
-
-            <div class="relative">
-                <img src="media/joyas/aro_plateado.webp" alt="#">
-                <span class="absolute left-3 top-3 z-10 bg-rotulo px-3 py-1 text-sm font-bold text-white uppercase">-20%</span>
-            </div>
-        
-            <div class="p-3 sm:p-4">
-                <p class="font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
-
-                <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Pendientes Aro Ondulado de Plata</h3>
-        
-                <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
-        
-                <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">20,00€</p>
-            </div>
+        <article class="producto-card">
+          <div class="relative">
+            <img src="media/joyas/aro_plateado.webp" alt="Pendientes Aro Ondulado de Plata" width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="absolute top-3 left-3 z-10 bg-rotulo px-3 py-1 text-sm font-bold text-papel uppercase">-20%</span>
+          </div>
+          <div class="p-3 sm:p-4">
+            <p class="mb-1 font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
+            <h2 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Pendientes Aro Ondulado de Plata</h2>
+            <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
+            <p class="precio-producto">20,00 €</p>
+          </div>
         </article>
 
-        <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
-
-            <div class="relative">
-                <img src="media/joyas/medalla.webp" alt="#">
-                <span class="absolute left-3 top-3 z-10 bg-azul-toldo px-3 py-1 text-sm font-bold text-white uppercase">Nuevo</span>
-            </div>
-        
-            <div class="p-3 sm:p-4">
-                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
-
-                <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Medalla Virgen Milagrosa Calada</h3>
-        
-                <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
-        
-                <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">29,90€</p>
-            </div>
-        </article> 
+        <article class="producto-card">
+          <div class="relative">
+            <img src="media/joyas/medalla.webp" alt="Medalla Virgen Milagrosa Calada" width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="absolute top-3 left-3 z-10 bg-azul-toldo px-3 py-1 text-sm font-bold text-papel uppercase">Nuevo</span>
+          </div>
+          <div class="p-3 sm:p-4">
+            <p class="mb-1 font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
+            <h2 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Medalla Virgen Milagrosa Calada</h2>
+            <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
+            <p class="precio-producto">29,90 €</p>
+          </div>
+        </article>
 
         <div class="bg-azul-toldo p-6 text-papel sm:p-8 dark:bg-azul-marino">
-            <h2 class="mb-2 text-xl font-medium md:text-2xl">Temporada de Comunión</h2>
-    
-            <p class="mb-5 text-sm leading-relaxed sm:text-base">-15% en rosarios, cruces y medallas hasta el 31 de mayo.</p>
-    
-            <a href="#" class="boton w-full sm:w-auto">Ver oferta</a>
+          <h2 class="mb-2 text-xl font-medium md:text-2xl">Temporada de Comunión</h2>
+          <p class="mb-5 text-sm leading-relaxed sm:text-base">-15% en rosarios, cruces y medallas hasta el 31 de mayo.</p>
+          <a href="productos.html" class="boton w-full sm:w-auto">Ver oferta</a>
         </div>
+      </div>
+    </section>
+    <!-- ===== FIN NOVEDADES ===== -->
+  </main>
+
+  <!-- ===== PIE (Martina) ===== -->
+  <footer class="mt-auto w-full bg-rotulo pt-12 pb-10 text-papel dark:bg-azul-marino dark:text-papel">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col justify-between lg:flex-row lg:items-end">
+        <h2 class="mb-5 font-titulo text-4xl font-medium sm:text-3xl">Máximo Parra</h2>
+
+        <nav aria-label="Pie de página">
+          <ul class="mb-5 flex flex-col items-start gap-3 font-texto md:flex-row md:gap-10">
+            <li><a href="index.html#nosotros" class="enlace-footer"><span>Nosotros</span><span aria-hidden="true">Nosotros</span></a></li>
+            <li><a href="productos.html" class="enlace-footer"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
+            <li><a href="novedades.html" aria-current="page" class="enlace-footer"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
+            <li><a href="index.html#visitanos" class="enlace-footer"><span>Visítanos</span><span aria-hidden="true">Visítanos</span></a></li>
+            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer" class="enlace-footer"><span>Instagram</span><span aria-hidden="true">Instagram</span></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="border-papel/30">
+
+      <p class="mt-5 text-xs">© 2026 Máximo Parra. Práctica de Maquetación Web, UDIT. Martina y Jaime. Repositorio en GitHub y web en GitHub Pages.</p>
     </div>
-
-    
-
-      
-
-</section>
-<!-- ===== FIN NOVEDADES ===== -->
-
-
-  <!-- ===== FOOTER (Martina) ===== -->
-   <footer class="mt-auto w-full bg-rotulo text-papel px-9 py-10 px-5 pt-12 pb-10 dark:bg-azul-marino dark:text-papel">
-
-    <div class="flex flex-col justify-between md:flex-row md:items-center md:flex-row md:items-end">
-        <h2 class="font-titulo text-4xl sm:text-3xl  font-medium mb-5">Máximo Parra</h2>
-
-        <ul class="flex flex-col md:flex-row items-start gap-3 md:gap-10 font-texto uppercase sm:text-sm mb-5">
-            <li><a href="index.html" class="enlace-footer">Nosotros</a></li>
-            <li><a href="productos.html" class="enlace-footer">Productos</a></li>
-            <li><a href="novedades.html" class="enlace-footer">Novedades</a></li>
-            <li><a href="index.html" class="enlace-footer">Visítanos</a></li>
-            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer" class="enlace-footer">Instagram</a></li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <p class="mt-5 text-xs">© 2026 Máximo Parra. Práctica de Maquetación Web, UDIT. Martina y Jaime. Repositorio en GitHub y web en GitHub Pages.</p>
-   </footer>
-     <!-- ===== FIN FOOTER ===== -->
+  </footer>
+  <!-- ===== FIN PIE ===== -->
 
   <!-- ===== SCRIPTS ===== -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="js/navbar.js"></script>
-  <script src="js/intro.js"></script>
-  <script src="js/portada.js"></script>
-  <script src="js/horario.js"></script>
-  <script src="js/carrusel.js"></script>
-  <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-// Intro: el logo brilla de izquierda a derecha y una cortina se levanta para dejar ver la web
+// Intro: el logo brilla de izquierda a derecha y una cortina se levanta para dejar ver la web.
+// No se muestra con movimiento reducido, al llegar a una sección (index.html#visitanos) ni al volver desde otra página de la web.
 
 (() => {
   const intro = document.getElementById('intro');
@@ -6,15 +7,32 @@
   const html = document.documentElement;
   if (!intro) return;
 
-  window.scrollTo(0, 0);
+  const destino = (() => {
+    if (location.hash.length < 2) return null;
+    try { return document.querySelector(location.hash); } catch (e) { return null; }
+  })();
+  const entrada = performance.getEntriesByType('navigation')[0];
+  const recarga = entrada && entrada.type === 'reload';
+  const desdeOtraPagina = !recarga && document.referrer !== '' && new URL(document.referrer).origin === location.origin;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || destino || desdeOtraPagina) {
     intro.remove();
     franja?.remove();
     html.classList.remove('overflow-hidden');
     html.dataset.listo = 'true';
+    if (destino) {
+      // la portada se monta al terminar DOMContentLoaded: después se recalcula y se salta a la sección
+      document.addEventListener('DOMContentLoaded', () => setTimeout(() => {
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+        destino.scrollIntoView({ behavior: 'instant' });
+      }, 0));
+    } else {
+      window.scrollTo(0, 0);
+    }
     return;
   }
+
+  window.scrollTo(0, 0);
 
   let terminada = false;
   const entrar = () => {
