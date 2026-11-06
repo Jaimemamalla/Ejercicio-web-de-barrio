@@ -29,3 +29,43 @@
   0%, 100% { transform: rotate(-2.5deg); }
   50%      { transform: rotate(2.5deg); }
 }
+
+/* ===== HOVER CARDS DE PRODUCTOS ===== */
+.producto-card {
+  position: relative;
+  z-index: 1;
+  transition: transform 400ms ease;
+}
+
+.producto-card:hover {
+  transform: scale(1.04);
+  z-index: 10;
+}
+
+.precio-producto {
+  display: inline-block;
+  transition:
+      transform 400ms ease,
+      background-color 400ms ease;
+}
+
+.producto-card:hover .precio-producto {
+  transform: rotate(-6deg);
+  background-color: var(--color-rotulo);
+  border-color: var(--color-rotulo);
+  color: var(--color-papel);
+}
+
+.dark .producto-card:hover .precio-producto {
+  transform: rotate(-6deg);
+  background-color: var(--color-papel);
+  border-color: var(--color-papel);
+  color: var(--color-azul-marino);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .producto-card,
+  .precio-producto {
+      transition: none;
+  }
+}
