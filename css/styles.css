@@ -31,20 +31,17 @@
 }
 
 /* ===== HOVER CARDS DE PRODUCTOS ===== */
-
 .producto-card {
   position: relative;
   z-index: 1;
   transition: transform 400ms ease;
 }
 
-/* La tarjeta completa crece */
 .producto-card:hover {
   transform: scale(1.04);
   z-index: 10;
 }
 
-/* Animación del precio */
 .precio-producto {
   display: inline-block;
   transition:
@@ -52,13 +49,20 @@
       background-color 400ms ease;
 }
 
-/* El precio gira y cambia a rosa */
 .producto-card:hover .precio-producto {
   transform: rotate(-6deg);
-  background-color: var(--color-rosa-mostrador);
+  background-color: var(--color-rotulo);
+  border-color: var(--color-rotulo);
+  color: var(--color-papel);
 }
 
-/* Accesibilidad */
+.dark .producto-card:hover .precio-producto {
+  transform: rotate(-6deg);
+  background-color: var(--color-papel);
+  border-color: var(--color-papel);
+  color: var(--color-azul-marino);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .producto-card,
   .precio-producto {
