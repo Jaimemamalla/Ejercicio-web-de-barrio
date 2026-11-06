@@ -102,6 +102,29 @@
           focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo
           dark:border-papel dark:bg-azul-toldo dark:after:translate-x-5 dark:after:bg-papel dark:focus-visible:outline-rotulo-claro;
       }
+
+              /* Animación enlaces del footer */
+              .enlace-footer {
+            @apply relative inline-block w-fit;
+
+            &::after {
+             content: "";
+            @apply absolute bottom-0 left-0 h-px w-full bg-current;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 300ms ease;
+            }
+
+            &:hover::after,
+            &:focus-visible::after {
+            transform: scaleX(1);
+            }
+
+            &:not(:hover):not(:focus-visible)::after {
+            transform-origin: right;
+            }
+    }   
+      
     }
   </style>
 
@@ -136,17 +159,17 @@
         </button>
         <ul class="hidden items-center gap-8 md:flex">
           <li><a href="#nosotros" class="enlace-nav"><span>Nosotros</span><span aria-hidden="true">Nosotros</span></a></li>
-          <li><a href="#productos" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
+          <li><a href="productos.html" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
         </ul>
       </div>
 
-      <a id="logo-nav" href="#portada" aria-label="Máximo Parra, inicio" class="flex items-center text-rotulo focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">
+      <a id="logo-nav" href="index.html" aria-label="Máximo Parra, inicio" class="flex items-center text-rotulo focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">
         <svg viewBox="0 0 1372 453" class="h-8 w-auto fill-current md:h-9" aria-hidden="true"><use href="#logo-path"/></svg>
       </a>
 
       <div class="flex items-center justify-end gap-8">
         <ul class="hidden items-center gap-8 md:flex">
-          <li><a href="#novedades" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
+          <li><a href="novedades.html" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
           <li><a href="#visitanos" class="enlace-nav"><span>Visítanos</span><span aria-hidden="true">Visítanos</span></a></li>
         </ul>
         <button id="interruptor-tema" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="interruptor"></button>
@@ -157,8 +180,8 @@
       <div class="overflow-hidden" inert>
         <ul class="flex flex-col px-4 pb-3">
           <li><a href="#nosotros" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Nosotros</a></li>
-          <li><a href="#productos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
-          <li><a href="#novedades" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
+          <li><a href="productos.html" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
+          <li><a href="novedades.html" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
           <li><a href="#visitanos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Visítanos</a></li>
         </ul>
       </div>
@@ -171,22 +194,22 @@
     <h1 class="mb-6 text-4xl font-bold text-balance text-rotulo md:text-5xl dark:text-rosa-mostrador">Nuestros mostradores</h1>
 
     <ul class="flex flex-wrap gap-2 mb-5">
-        <li><a href="#productos" class="chip">Todo</a></li>
-        <li><a href="#productos" class="chip">Pendientes</a></li>
-        <li><a href="#productos" class="chip">Comunión</a></li>
-        <li><a href="#productos" class="chip">Collares</a></li>
-        <li><a href="#productos" class="chip">Pulseras</a></li>
-        <li><a href="#productos" class="chip">Sortijas</a></li>
-        <li><a href="#productos" class="chip">Abanicos</a></li>
-        <li><a href="#productos" class="chip">Cruces y rosarios</a></li>
-        <li><a href="#productos" class="chip">Peinetas</a></li>
+        <li><a href="productos.html" class="chip">Todo</a></li>
+        <li><a href="productos.html" class="chip">Pendientes</a></li>
+        <li><a href="productos.html" class="chip">Comunión</a></li>
+        <li><a href="productos.html" class="chip">Collares</a></li>
+        <li><a href="productos.html" class="chip">Pulseras</a></li>
+        <li><a href="productos.html" class="chip">Sortijas</a></li>
+        <li><a href="productos.html" class="chip">Abanicos</a></li>
+        <li><a href="productos.html" class="chip">Cruces y rosarios</a></li>
+        <li><a href="productos.html" class="chip">Peinetas</a></li>
     </ul>
 
     <div class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/broche.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Broche Floral de Marquesitas</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm text-rotulo dark:border-papel dark:text-papel">34,90€</p>
@@ -196,8 +219,8 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/perla.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
-                <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">endientes Perla y Marquesitas</h3>
+                <p class="font-titulo font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Pendientes Perla y Marquesitas</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">28,50€</p>
             </div>
@@ -206,7 +229,7 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/abanico.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Abanico de Limones</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">24,90€</p>
@@ -216,7 +239,7 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/aro.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Pendientes Aro Cuerda</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">21,90€</p>
@@ -226,7 +249,7 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/peineta.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Peineta Calada</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">29,50€</p>
@@ -236,7 +259,7 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/circonita.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Colgante Flor con Piedra Azul</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">28,90€</p>
@@ -246,7 +269,7 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/dorado.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Pendientes Lágrima</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">24,50€</p>
@@ -256,7 +279,7 @@
         <article class="producto-card overflow-hidden rounded-sm border border-gris-200 bg-papel dark:bg-azul-marino dark:border-papel/20">
             <img src="media/joyas/abanico_flor.webp" alt="#">
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra<p>          
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Abanico Artesanal de Flores</h3>
                 <p class="mb-2 text-xs text-gris-600 dark:text-azul-claro">Plata 925</p>
                 <p class="precio-producto inline-block rotate-6 border-2 border-rotulo px-2 py-1 text-sm font-medium text-rotulo dark:border-papel dark:text-papel">29,90€</p>
@@ -271,17 +294,17 @@
   <!-- ===== FIN PRODUCTOS ===== -->
 
   <!-- ===== FOOTER (Martina) ===== -->
-   <footer class="mt-auto w-full bg-rotulo text-papel px-9 py-10 px-5 pt-12 pb-10 dark:bg-azul-marino dark:text-papel">
+  <footer class="mt-auto w-full bg-rotulo text-papel px-9 py-10 px-5 pt-12 pb-10 dark:bg-azul-marino dark:text-papel">
 
     <div class="flex flex-col justify-between md:flex-row md:items-center md:flex-row md:items-end">
         <h2 class="font-titulo text-4xl sm:text-3xl  font-medium mb-5">Máximo Parra</h2>
 
         <ul class="flex flex-col md:flex-row items-start gap-3 md:gap-10 font-texto uppercase sm:text-sm mb-5">
-            <li><a href="#">Nosotros</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="#">Novedades</a></li>
-            <li><a href="#">Visítanos</a></li>
-            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="index.html" class="enlace-footer">Nosotros</a></li>
+            <li><a href="productos.html" class="enlace-footer">Productos</a></li>
+            <li><a href="novedades.html" class="enlace-footer">Novedades</a></li>
+            <li><a href="index.html" class="enlace-footer">Visítanos</a></li>
+            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer" class="enlace-footer">Instagram</a></li>
         </ul>
     </div>
 

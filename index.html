@@ -122,6 +122,29 @@
           focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo
           dark:border-papel dark:bg-azul-toldo dark:after:translate-x-5 dark:after:bg-papel dark:focus-visible:outline-rotulo-claro;
       }
+
+              /* Animación enlaces del footer */
+              .enlace-footer {
+            @apply relative inline-block w-fit;
+
+            &::after {
+             content: "";
+            @apply absolute bottom-0 left-0 h-px w-full bg-current;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 300ms ease;
+            }
+
+            &:hover::after,
+            &:focus-visible::after {
+            transform: scaleX(1);
+            }
+
+            &:not(:hover):not(:focus-visible)::after {
+            transform-origin: right;
+            }
+    }   
+      
     }
   </style>
 
@@ -172,17 +195,17 @@
         </button>
         <ul class="hidden items-center gap-8 md:flex">
           <li><a href="#nosotros" class="enlace-nav"><span>Nosotros</span><span aria-hidden="true">Nosotros</span></a></li>
-          <li><a href="#productos" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
+          <li><a href="productos.html" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
         </ul>
       </div>
 
-      <a id="logo-nav" href="#portada" aria-label="Máximo Parra, inicio" class="flex items-center text-rotulo focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">
+      <a id="logo-nav" href="index.html" aria-label="Máximo Parra, inicio" class="flex items-center text-rotulo focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">
         <svg viewBox="0 0 1372 453" class="h-8 w-auto fill-current md:h-9" aria-hidden="true"><use href="#logo-path"/></svg>
       </a>
 
       <div class="flex items-center justify-end gap-8">
         <ul class="hidden items-center gap-8 md:flex">
-          <li><a href="#novedades" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
+          <li><a href="novedades.html" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
           <li><a href="#visitanos" class="enlace-nav"><span>Visítanos</span><span aria-hidden="true">Visítanos</span></a></li>
         </ul>
         <button id="interruptor-tema" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="interruptor"></button>
@@ -198,10 +221,10 @@
         <a href="#nosotros" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Nosotros</a>
       </li>
       <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-150 dark:border-papel/20">
-        <a href="#productos" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Productos</a>
+        <a href="productos.html" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Productos</a>
       </li>
       <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-200 dark:border-papel/20">
-        <a href="#novedades" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Novedades</a>
+        <a href="novedades.html" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Novedades</a>
       </li>
       <li class="translate-y-6 border-b border-rotulo-oscuro/20 opacity-0 transition duration-500 ease-out group-data-[abierto=true]:translate-y-0 group-data-[abierto=true]:opacity-100 group-data-[abierto=true]:delay-250 dark:border-papel/20">
         <a href="#visitanos" class="block py-5 text-4xl font-bold tracking-tight uppercase transition-colors hover:text-tinta focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:hover:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">Visítanos</a>
@@ -263,10 +286,10 @@
             <h2 class="mb-5 text-3xl font-bold md:text-5xl">Elige el tuyo</h2>
             <p class="etiqueta mb-3">Material</p>
             <ul class="flex flex-wrap gap-2">
-              <li><a href="#productos" class="chip">Plata</a></li>
-              <li><a href="#productos" class="chip">Rodio</a></li>
-              <li><a href="#productos" class="chip">Chapado</a></li>
-              <li><a href="#productos" class="chip">Marcasita</a></li>
+              <li><a href="productos.html" class="chip">Plata</a></li>
+              <li><a href="productos.html" class="chip">Rodio</a></li>
+              <li><a href="productos.html" class="chip">Chapado</a></li>
+              <li><a href="productos.html" class="chip">Marcasita</a></li>
             </ul>
           </div>
         </div>
@@ -277,12 +300,12 @@
             <h2 class="mb-5 text-3xl font-bold md:text-5xl">Y su cierre</h2>
             <p class="etiqueta mb-3">Cierre</p>
             <ul class="flex flex-wrap gap-2">
-              <li><a href="#productos" class="chip">Tornillo</a></li>
-              <li><a href="#productos" class="chip">Omega</a></li>
-              <li><a href="#productos" class="chip">Presión</a></li>
-              <li><a href="#productos" class="chip">Varilla</a></li>
-              <li><a href="#productos" class="chip">Gancho</a></li>
-              <li><a href="#productos" class="chip">Seguridad</a></li>
+              <li><a href="productos.html" class="chip">Tornillo</a></li>
+              <li><a href="productos.html" class="chip">Omega</a></li>
+              <li><a href="productos.html" class="chip">Presión</a></li>
+              <li><a href="productos.html" class="chip">Varilla</a></li>
+              <li><a href="productos.html" class="chip">Gancho</a></li>
+              <li><a href="productos.html" class="chip">Seguridad</a></li>
             </ul>
           </div>
         </div>
@@ -299,7 +322,7 @@
           <img src="media/fotos/escaparate_entero.webp" alt="Fachada de la tienda Máximo Parra: rótulo azul de bisutería, puerta de cristal y escaparate" width="1314" height="902" class="aspect-[4/3] w-full border-2 border-rotulo object-cover object-[50%_30%] shadow-[10px_10px_0_var(--color-rotulo)] sm:aspect-[16/10] dark:border-papel dark:shadow-[10px_10px_0_var(--color-azul-claro)]" loading="lazy" decoding="async">
         </figure>
         <div class="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6">
-          <a href="#productos" class="boton">Ver productos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="productos.html" class="boton">Ver productos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a href="#visitanos" class="boton">Cómo llegar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
@@ -380,7 +403,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" class="group-data-[pausado=true]:hidden"><path d="M8 5v14M16 5v14"/></svg>
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="hidden group-data-[pausado=true]:block"><path d="M8 5l11 7-11 7z"/></svg>
               </button>
-            </div>
+            </div> 
             <p class="text-sm font-medium tracking-wider text-rotulo uppercase dark:text-papel">
               <span data-carrusel-pie>Abanicos</span>
               <span data-carrusel-cuenta class="ml-2 text-gris-600 dark:text-azul-niebla">1 / 3</span>
@@ -473,9 +496,26 @@
     </section>
     <!-- ===== FIN HORARIO Y UBICACIÓN ===== -->
 
-  </main>
+<!-- ===== FOOTER (Martina) ===== -->
+<footer class="mt-auto w-full bg-rotulo text-papel px-9 py-10 px-5 pt-12 pb-10 dark:bg-azul-marino dark:text-papel">
 
-  <!-- ===== FOOTER (Martina) ===== -->
+    <div class="flex flex-col justify-between md:flex-row md:items-center md:flex-row md:items-end">
+        <h2 class="font-titulo text-4xl sm:text-3xl  font-medium mb-5">Máximo Parra</h2>
+
+        <ul class="flex flex-col md:flex-row items-start gap-3 md:gap-10 font-texto uppercase sm:text-sm mb-5">
+            <li><a href="index.html" class="enlace-footer">Nosotros</a></li>
+            <li><a href="productos.html" class="enlace-footer">Productos</a></li>
+            <li><a href="novedades.html" class="enlace-footer">Novedades</a></li>
+            <li><a href="index.html" class="enlace-footer">Visítanos</a></li>
+            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer" class="enlace-footer">Instagram</a></li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <p class="mt-5 text-xs">© 2026 Máximo Parra. Práctica de Maquetación Web, UDIT. Martina y Jaime. Repositorio en GitHub y web en GitHub Pages.</p>
+   </footer>
+     <!-- ===== FIN FOOTER ===== -->
 
   <!-- ===== SCRIPTS ===== -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

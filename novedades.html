@@ -102,6 +102,28 @@
           focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-azul-toldo
           dark:border-papel dark:bg-azul-toldo dark:after:translate-x-5 dark:after:bg-papel dark:focus-visible:outline-rotulo-claro;
       }
+        /* Animación enlaces del footer */
+        .enlace-footer {
+            @apply relative inline-block w-fit;
+
+            &::after {
+             content: "";
+            @apply absolute bottom-0 left-0 h-px w-full bg-current;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 300ms ease;
+            }
+
+            &:hover::after,
+            &:focus-visible::after {
+            transform: scaleX(1);
+            }
+
+            &:not(:hover):not(:focus-visible)::after {
+            transform-origin: right;
+            }
+    }   
+      
     }
   </style>
 
@@ -136,17 +158,17 @@
         </button>
         <ul class="hidden items-center gap-8 md:flex">
           <li><a href="#nosotros" class="enlace-nav"><span>Nosotros</span><span aria-hidden="true">Nosotros</span></a></li>
-          <li><a href="#productos" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
+          <li><a href="productos.html" class="enlace-nav"><span>Productos</span><span aria-hidden="true">Productos</span></a></li>
         </ul>
       </div>
 
-      <a id="logo-nav" href="#portada" aria-label="Máximo Parra, inicio" class="flex items-center text-rotulo focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">
+      <a id="logo-nav" href="index.html" aria-label="Máximo Parra, inicio" class="flex items-center text-rotulo focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-azul-toldo dark:text-rosa-mostrador dark:focus-visible:outline-rotulo-claro">
         <svg viewBox="0 0 1372 453" class="h-8 w-auto fill-current md:h-9" aria-hidden="true"><use href="#logo-path"/></svg>
       </a>
 
       <div class="flex items-center justify-end gap-8">
         <ul class="hidden items-center gap-8 md:flex">
-          <li><a href="#novedades" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
+          <li><a href="novedades.html" class="enlace-nav"><span>Novedades</span><span aria-hidden="true">Novedades</span></a></li>
           <li><a href="#visitanos" class="enlace-nav"><span>Visítanos</span><span aria-hidden="true">Visítanos</span></a></li>
         </ul>
         <button id="interruptor-tema" type="button" role="switch" aria-checked="false" aria-label="Modo oscuro" class="interruptor"></button>
@@ -157,8 +179,8 @@
       <div class="overflow-hidden" inert>
         <ul class="flex flex-col px-4 pb-3">
           <li><a href="#nosotros" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Nosotros</a></li>
-          <li><a href="#productos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
-          <li><a href="#novedades" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
+          <li><a href="productos.html" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Productos</a></li>
+          <li><a href="novedades.html" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Novedades</a></li>
           <li><a href="#visitanos" class="block border-t border-rotulo-oscuro/20 py-3.5 text-base font-medium tracking-wider uppercase transition-colors hover:text-tinta dark:border-papel/20 dark:hover:text-rosa-mostrador">Visítanos</a></li>
         </ul>
       </div>
@@ -180,7 +202,7 @@
             </div>
         
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
+                <p class="font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
 
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Broche Lazo de Marquesitas</h3>
         
@@ -198,7 +220,7 @@
             </div>
         
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
+                <p class="font-titulo text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
 
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Pendientes Aro Ondulado de Plata</h3>
         
@@ -216,7 +238,7 @@
             </div>
         
             <div class="p-3 sm:p-4">
-                <p class="mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
+                <p class="font-titulo mb-1 text-xs font-medium text-rotulo dark:text-rosa-mostrador">Máximo Parra</p>
 
                 <h3 class="mb-1 text-sm font-medium text-tinta dark:text-papel">Medalla Virgen Milagrosa Calada</h3>
         
@@ -250,11 +272,11 @@
         <h2 class="font-titulo text-4xl sm:text-3xl  font-medium mb-5">Máximo Parra</h2>
 
         <ul class="flex flex-col md:flex-row items-start gap-3 md:gap-10 font-texto uppercase sm:text-sm mb-5">
-            <li><a href="#">Nosotros</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><a href="#">Novedades</a></li>
-            <li><a href="#">Visítanos</a></li>
-            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="index.html" class="enlace-footer">Nosotros</a></li>
+            <li><a href="productos.html" class="enlace-footer">Productos</a></li>
+            <li><a href="novedades.html" class="enlace-footer">Novedades</a></li>
+            <li><a href="index.html" class="enlace-footer">Visítanos</a></li>
+            <li><a href="https://www.instagram.com/maximoparrabisuteria/?hl=es" target="_blank" rel="noopener noreferrer" class="enlace-footer">Instagram</a></li>
         </ul>
     </div>
 
