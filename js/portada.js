@@ -8,12 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const SCROLL_POR_UNIDAD = 48; // % de pantalla de scroll por unidad de animación: súbelo para alargarla
   const ctx = lienzo.getContext('2d');
   const LADO = lienzo.width;
-  const TOTAL = 192;
-  const FRENTE = 48;
-  const PERFIL = 155;
-  const GRADOS_POR_FOTOGRAMA = 90 / (PERFIL - FRENTE);
-  const ANGULO_MIN = FRENTE * GRADOS_POR_FOTOGRAMA;
-  const FIN_PLANO = 360 - ANGULO_MIN;
+  const TOTAL = 144; // fotogramas de una vuelta completa; el último enlaza con el primero
+  const FRENTE = 18; // fotograma en el que la joya mira de frente (0 grados)
+  const FIN_PLANO = 360;
   const fotogramas = new Array(TOTAL).fill(null);
   let cargadas = 0;
   let ultimaClave = '';
@@ -28,60 +25,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const centro = LADO / 2;
   const degradado = bordeCtx.createRadialGradient(centro, centro, 0, centro, centro, centro * 1.05);
   degradado.addColorStop(0, '#000');
-  degradado.addColorStop(0.74, '#000');
+  degradado.addColorStop(0.88, '#000');
   degradado.addColorStop(1, 'rgba(0,0,0,0)');
   bordeCtx.fillStyle = degradado;
   bordeCtx.fillRect(0, 0, LADO, LADO);
 
   /* Pintar la joya según su ángulo de giro.
-     Entre -40 y 90 grados son fotogramas reales del vídeo (0 grados es de frente); el resto de la
-     vuelta es un giro plano: la joya se estrecha hasta quedar de canto y vuelve a abrirse, como una moneda. */
+     La secuencia es una vuelta completa (360 grados = TOTAL fotogramas) y 0 grados es de frente.
+     Entre dos fotogramas se mezcla un poco para que el giro vaya suave aunque el scroll sea lento. */
   const buscar = (k, margen = 12) => {
     for (let d = 0; d <= margen; d++) {
-      if (fotogramas[k - d]) return fotogramas[k - d];
-      if (fotogramas[k + d]) return fotogramas[k + d];
+      if (fotogramas[(k - d + TOTAL) % TOTAL]) return fotogramas[(k - d + TOTAL) % TOTAL];
+      if (fotogramas[(k + d) % TOTAL]) return fotogramas[(k + d) % TOTAL];
     }
     return null;
   };
-  const plano = (img, ancho, espejo, alfa) => {
-    ctx.globalAlpha = alfa;
-    ctx.setTransform((espejo ? -1 : 1) * ancho, 0, 0, 1, LADO / 2, 0);
-    ctx.drawImage(img, -LADO / 2, 0);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.globalAlpha = 1;
-  };
   const dibujar = (grados) => {
-    const t = (((grados + ANGULO_MIN) % 360) + 360) % 360 - ANGULO_MIN;
-    const clave = `${Math.round(t * 20)}:${cargadas}`;
+    const pos = ((((FRENTE + (grados / 360) * TOTAL) % TOTAL) + TOTAL) % TOTAL);
+    const clave = `${Math.round(pos * 20)}:${cargadas}`;
     if (clave === ultimaClave) return;
-    const frente = buscar(FRENTE);
-    const real = t <= 90 ? buscar(Math.round(FRENTE + t / GRADOS_POR_FOTOGRAMA)) : null;
-    if (!frente || (t <= 90 && !real)) return;
+    const i0 = Math.floor(pos);
+    const mezcla = pos - i0;
+    const a = buscar(i0);
+    const b = buscar((i0 + 1) % TOTAL);
+    if (!a) return;
     ultimaClave = clave;
 
     ctx.globalCompositeOperation = 'source-over';
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, LADO, LADO);
-
-    if (t <= 90) {
-      ctx.drawImage(real, 0, 0);
-    } else {
-      const ancho = Math.max(0.05, Math.abs(Math.cos((t * Math.PI) / 180)));
-      const inicioMezcla = FIN_PLANO - 18;
-      if (t < 270) {
-        plano(frente, ancho, true, 1);
-      } else if (t < inicioMezcla) {
-        plano(frente, ancho, false, 1);
-      } else {
-        const primero = buscar(0);
-        const mezcla = (t - inicioMezcla) / 18;
-        plano(frente, ancho, false, primero ? 1 - mezcla : 1);
-        if (primero) {
-          ctx.globalAlpha = mezcla;
-          ctx.drawImage(primero, 0, 0);
-          ctx.globalAlpha = 1;
-        }
-      }
+    ctx.drawImage(a, 0, 0, LADO, LADO);
+    if (b && b !== a && mezcla > 0.02) {
+      ctx.globalAlpha = mezcla;
+      ctx.drawImage(b, 0, 0, LADO, LADO);
+      ctx.globalAlpha = 1;
     }
 
     ctx.globalCompositeOperation = 'destination-in';
@@ -94,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
   [8, 4, 2, 1].forEach((paso) => {
     const grupo = [];
     for (let i = 0; i < TOTAL; i += paso) if (!orden.includes(i)) grupo.push(i);
-    grupo.sort((a, b) => Math.abs(a - FRENTE) - Math.abs(b - FRENTE));
+    const dist = (i) => Math.min(Math.abs(i - FRENTE), TOTAL - Math.abs(i - FRENTE));
+    grupo.sort((a, b) => dist(a) - dist(b));
     orden.push(...grupo);
   });
   orden.forEach((i) => {
